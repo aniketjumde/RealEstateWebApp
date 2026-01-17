@@ -37,6 +37,11 @@
         <h2>User Dashboard</h2>
         <p>This is your user dashboard. You can view properties, manage your listings, etc.</p>
         <!-- Add user-specific content here -->
+        
     </div>
+    
+    <!-- LINK TO ADD PROPERTY PAGE -->
+    <a href="add-property.jsp">➕ Add Property</a>
+    
 </body>
 </html>

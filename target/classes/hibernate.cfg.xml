@@ -17,10 +17,14 @@
         <!-- Hibernate Configuration-->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">false</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Mapping Files-->
         <mapping class="com.realestate.model.User" />
+        <mapping class="com.realestate.model.Property" />
+        <mapping class="com.realestate.model.PropertyImage"/>
+        <mapping class="com.realestate.model.Inquiry"/>
+
     </session-factory>
 
 </hibernate-configuration>

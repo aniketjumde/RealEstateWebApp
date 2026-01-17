@@ -20,6 +20,7 @@ public class AuthFilter implements Filter {
         
         // Public paths
         if (path.startsWith("/login.jsp") || 
+        		path.startsWith("/add-property.jsp")||
             path.startsWith("/auth/") || 
             path.startsWith("/css/") || 
             path.startsWith("/js/") || 
