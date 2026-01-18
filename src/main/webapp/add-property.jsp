@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Add New Property</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
     body {
@@ -78,7 +83,7 @@
     <h2>Add New Property</h2>
     <div class="sub">Fill in the details below to list your property</div>
 
-    <form action="property" method="post">
+    <form action="property" method="post" enctype="multipart/form-data">
 
         <!-- BASIC INFORMATION -->
         <label>Property Title</label>
@@ -180,10 +185,32 @@
                 <input type="text" name="longitude" placeholder="e.g., -74.0060">
             </div>
         </div>
+		 <%
+				    String successMessage = (String) session.getAttribute("successMessage");
+				    if (successMessage != null) {
+				%>
+				<script>
+				    Swal.fire({
+				        icon: 'success',
+				        title: 'Success',
+				        text: '<%= successMessage %>',
+				        confirmButtonColor: '#2563EB'
+				    });
+				</script>
+				<%
+		        session.removeAttribute("successMessage");
+		    }
+		%>
+		        
+
+		<label>Property Images</label>
+		<input type="file" name="images" multiple accept="image/*">
 
         <button type="submit">Add Property</button>
 
     </form>
+    
+    
 </div>
 
 </body>

@@ -27,6 +27,7 @@ public class Property
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="property_id")
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

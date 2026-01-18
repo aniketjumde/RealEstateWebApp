@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -25,11 +26,12 @@ public class PropertyImage
 	private int imageId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="property_id")
+	@JoinColumn(name="property_id", nullable = false)
 	private Property property;
 	
-	@Column(name = "image_url")
-	private String imageUrl;
+	@Lob
+	@Column(columnDefinition="LONGBLOB")
+	private byte[] imageData;
 	    
 	@CreationTimestamp
 	@Column(name = "created_at")
@@ -39,21 +41,25 @@ public class PropertyImage
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
+	//Constructor
+	
 	public PropertyImage() {}
 	
 	
 
-	public PropertyImage(int imageId, Property property, String imageUrl, LocalDateTime createdAt,
+	public PropertyImage(int imageId, Property property, byte[] imageData, LocalDateTime createdAt,
 			LocalDateTime updatedAt) {
 		super();
 		this.imageId = imageId;
 		this.property = property;
-		this.imageUrl = imageUrl;
+		this.imageData = imageData;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
 
 
+
+	//Getter and Setter
 
 	public int getImageId() {
 		return imageId;
@@ -71,12 +77,10 @@ public class PropertyImage
 		this.property = property;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
+	
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public byte[] getImageData() {
+		return imageData;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -94,6 +98,10 @@ public class PropertyImage
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
 	
 	
 }

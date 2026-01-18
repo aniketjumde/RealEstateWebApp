@@ -6,6 +6,7 @@ import com.realestate.dao.PropertyDAO;
 import com.realestate.enums.PropertyVerificationStatus;
 import com.realestate.factory.PropertyDaoFactory;
 import com.realestate.model.Property;
+import com.realestate.model.User;
 
 public class PropertyServiceImpl implements PropertyService 
 {
@@ -56,10 +57,10 @@ public class PropertyServiceImpl implements PropertyService
 	}
 
 	@Override
-	public List<Property> searchProperties(String city, String type, Integer minBedrooms, Integer maxPrice) 
+	public List<Property> searchProperties(String city, String type, Integer minBedrooms) 
 	{
 		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
-		return propertiesDao.searchProperties(city, type, minBedrooms, maxPrice);
+		return propertiesDao.searchProperties(city, type, minBedrooms);
 	}
 
 	@Override
@@ -68,6 +69,54 @@ public class PropertyServiceImpl implements PropertyService
 		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		
 		return propertiesDao.findByStatus(status);
+	}
+
+	@Override
+	public List<Property> getApprovedProperties() 
+	{	
+		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
+        return propertiesDao.findByStatus(PropertyVerificationStatus.APPROVED);
+
+	}
+
+	@Override
+	public List<Property> getPendingProperties() 
+	{
+		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
+        return propertiesDao.findByStatus(PropertyVerificationStatus.PENDING);
+	}
+
+	@Override
+	public boolean approveProperty(Long propertyId) 
+	{
+		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance();
+		Property property=propertiesDao.getPropertyById(propertyId);
+		if (property != null) {
+            property.setVerification(PropertyVerificationStatus.APPROVED);
+            propertiesDao.updateProperty(property);
+            return true;
+        }
+        return false;
+ 
+	}
+
+	@Override
+	public boolean rejectProperty(Long propertyId) 
+	{
+		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance();
+		Property property=propertiesDao.getPropertyById(propertyId);
+		if (property != null) {
+            property.setVerification(PropertyVerificationStatus.REJECTED);
+            propertiesDao.updateProperty(property);
+            return true;
+        }
+        return false;
+	}
+
+	@Override
+	public List<Property> getPropertiesByUser(User user) {
+		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance();
+		return propertiesDao.getPropertiesByUser(user);
 	}
 
 	

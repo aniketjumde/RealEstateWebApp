@@ -1,20 +1,26 @@
 package com.realestate.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.realestate.enums.PropertyVerificationStatus;
-import com.realestate.factory.PropertyServiesFactory;
+import com.realestate.factory.PropertyServiceFactory;
 import com.realestate.model.Property;
+import com.realestate.model.PropertyImage;
 import com.realestate.model.User;
 import com.realestate.service.PropertyService;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
+@MultipartConfig
 @WebServlet("/property")  
 public class PropertyServlet extends HttpServlet 
 {
@@ -24,15 +30,31 @@ public class PropertyServlet extends HttpServlet
 
     @Override
     public void init() {
-        propertyService = PropertyServiesFactory.getServiceInstance();
+        propertyService = PropertyServiceFactory.getServiceInstance();
     }
 
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
+    {
+
+    	List<Property> properties=propertyService.getAllProperties();
+
+    	if (properties == null) {
+    		System.out.println("Null the list");
+            properties = new ArrayList<>();
+        }
+    	request.setAttribute("list", properties);
+    	request.getRequestDispatcher("property-list.jsp")
+        .forward(request, response);
+        
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        User user = (session != null) ? (User) session.getAttribute("user") : null;
+        User user = (User) session.getAttribute("user");
 
         if (user == null) {
             response.sendRedirect("login.jsp");
@@ -41,7 +63,7 @@ public class PropertyServlet extends HttpServlet
 
         try {
             Property property = new Property();
-
+            property.setUser(user);
             property.setTitle(request.getParameter("title"));
             property.setDescription(request.getParameter("description"));
             property.setPrice(parseDouble(request.getParameter("price")));
@@ -64,10 +86,31 @@ public class PropertyServlet extends HttpServlet
             property.setVerification(PropertyVerificationStatus.PENDING);
             property.setUser(user);
 
-            //  SAVE  ONLY
-            propertyService.addProperty(property);
 
-            response.sendRedirect("property");
+            // -------- IMAGE --------
+            for (Part part : request.getParts()) {
+
+                if ("images".equals(part.getName()) && part.getSize() > 0) {
+
+                    byte[] imageBytes = part.getInputStream().readAllBytes();
+
+                    PropertyImage image = new PropertyImage();
+                    image.setImageData(imageBytes);
+
+                    property.addImage(image);
+                }
+            }
+
+            
+            //  SAVE  Property Details
+            propertyService.addProperty(property);
+            
+            //Success Message
+            HttpSession successSession = request.getSession();
+            successSession.setAttribute("successMessage", "Property added successfully");
+
+            // Redirect
+            response.sendRedirect("add-property.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();

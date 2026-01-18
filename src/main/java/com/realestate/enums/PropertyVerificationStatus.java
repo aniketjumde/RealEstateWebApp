@@ -4,6 +4,7 @@ public enum PropertyVerificationStatus
 {
 	APPROVED,
 	PENDING,
+	REJECTED,
 	SOLD,
 	RENT
 

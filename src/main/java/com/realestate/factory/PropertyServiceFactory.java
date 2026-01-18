@@ -3,11 +3,11 @@ package com.realestate.factory;
 import com.realestate.service.PropertyService;
 import com.realestate.service.PropertyServiceImpl;
 
-public class PropertyServiesFactory 
+public class PropertyServiceFactory 
 {
 	private static PropertyService propertyService=null;
 	
-	private PropertyServiesFactory() {}
+	private PropertyServiceFactory() {}
 	
 	public static PropertyService getServiceInstance()
 	{

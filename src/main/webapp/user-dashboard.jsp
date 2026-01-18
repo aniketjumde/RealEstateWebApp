@@ -42,6 +42,7 @@
     
     <!-- LINK TO ADD PROPERTY PAGE -->
     <a href="add-property.jsp">➕ Add Property</a>
+        <a href="property-list.jsp">Property Details</a>
     
 </body>
 </html>

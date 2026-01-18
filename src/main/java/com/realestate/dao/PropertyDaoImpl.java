@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 
 import com.realestate.enums.PropertyVerificationStatus;
 import com.realestate.model.Property;
+import com.realestate.model.User;
 import com.realestate.util.HibernateUtil;
 
 import jakarta.persistence.Query;
@@ -24,8 +25,11 @@ public class PropertyDaoImpl implements PropertyDAO
 		try(Session session=HibernateUtil.getSessionFactory().openSession())
 		{
 			transaction=session.beginTransaction();
-			
-				session.persist(property);
+			 //  VERY IMPORTANT: reattach User
+	        User managedUser = session.get(User.class, property.getUser().getId());
+	        property.setUser(managedUser);
+
+	        session.persist(property); 
 			
 			transaction.commit();
 			return property;
@@ -106,14 +110,22 @@ public class PropertyDaoImpl implements PropertyDAO
             return session.get(Property.class, id);
         }
 	}
-
+	
 	@Override
 	public List<Property> getAllProperties() 
 	{
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-            return session.createQuery("FROM Properties ",Property.class).list();
-        }	
+            return session.createQuery("SELECT DISTINCT p FROM Property p " +
+                    "LEFT JOIN FETCH p.images " +
+                    "LEFT JOIN FETCH p.user",
+                    Property.class).getResultList();
+        }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
     }
 
 
@@ -122,12 +134,13 @@ public class PropertyDaoImpl implements PropertyDAO
 	{
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-			 Query query = session.createQuery("FROM Properties p WHERE p.propertyType = :type AND p.purpose = :purpose",Property.class);
+			String hql = "FROM Property p WHERE p.propertyType = :type AND p.purpose = :purpose";
+            Query query = session.createQuery(hql, Property.class);
 
 			  query.setParameter("type", type);
 			  query.setParameter("purpose", purpose);
 
-			  return query.getResultList();
+			  return ((org.hibernate.query.Query<Property>) query).list();
 
 		}
 		catch (Exception e) 
@@ -139,21 +152,20 @@ public class PropertyDaoImpl implements PropertyDAO
 
 
 	@Override
-	public List<Property> searchProperties(String city, String type, Integer minBedrooms, Integer maxPrice) 
+	public List<Property> searchProperties(String city, String type, Integer minBedrooms) 
 	{
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-			StringBuilder hql=new StringBuilder("from Propertes where 1=1");
+			StringBuilder hql=new StringBuilder("from Property where 1=1");
 			
 			if(city!=null && !city.isEmpty())
 			{
 				hql.append(" AND city=:city");
-			}
 			
 			if(type!=null && !type.isEmpty())
 			{
-				hql.append(" AND type:type");
+				hql.append(" AND propertyType=:type");
 			}
 			
 			 if (minBedrooms != null) 
@@ -166,10 +178,7 @@ public class PropertyDaoImpl implements PropertyDAO
 	                hql.append(" and bedrooms >= :minBedrooms");
 	         }
 			 
-			 if(maxPrice !=null)
-			 {
-	                hql.append(" and price >= :maxPrice");
-			 }
+			
 			 
 			 Query query = session.createQuery(hql.toString(), Property.class);
 	            
@@ -182,17 +191,18 @@ public class PropertyDaoImpl implements PropertyDAO
 	            if (minBedrooms != null) {
 	                query.setParameter("minBedrooms", minBedrooms);
 	            }
-	            if (maxPrice != null) {
-	                query.setParameter("maxPrice", maxPrice);
-	            }
+	            
 	           
 	          return query.getResultList();
+		}
+			
 		}
 		catch (Exception e) 
 		{
 			  e.printStackTrace();
 			  return Collections.emptyList();
 	    }
+		return Collections.emptyList();
 	}
 
 
@@ -201,7 +211,7 @@ public class PropertyDaoImpl implements PropertyDAO
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-			 Query query = session.createQuery("FROM Properties WHERE statau=:status",Property.class);
+			 Query query = session.createQuery("FROM Property WHERE verification = :status"	,Property.class);
 			 query.setParameter("status",status);
 			  
 			  return query.getResultList();
@@ -214,7 +224,22 @@ public class PropertyDaoImpl implements PropertyDAO
 	    }
 	}
 
-	
+
+	@Override
+	public List<Property> getPropertiesByUser(User user) 
+	{
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+		{
+	        Query query=session.createQuery(
+	            "FROM Property p WHERE p.user.id = :userId",
+	            Property.class);
+	        
+	        query.setParameter("userId", user.getId());
+	        return query.getResultList();
+	    }
+	}
+
+
 	
 
 }
