@@ -37,17 +37,17 @@ public class PropertyServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
     {
 
-    	List<Property> properties=propertyService.getAllProperties();
-
-    	if (properties == null) {
-    		System.out.println("Null the list");
-            properties = new ArrayList<>();
-        }
-    	request.setAttribute("list", properties);
-    	request.getRequestDispatcher("property-list.jsp")
-        .forward(request, response);
+            request.setAttribute("properties",
+                propertyService.getAllProperties()
+            );
         
-    }
+
+        request.getRequestDispatcher("property-list.jsp")
+               .forward(request, response);
+	}
+
+        
+    
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -83,7 +83,7 @@ public class PropertyServlet extends HttpServlet
             property.setLatitude(request.getParameter("latitude"));
             property.setLongitude(request.getParameter("longitude"));
 
-            property.setVerification(PropertyVerificationStatus.PENDING);
+            property.setVerification(PropertyVerificationStatus.APPROVED);
             property.setUser(user);
 
 

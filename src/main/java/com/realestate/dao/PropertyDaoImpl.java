@@ -105,10 +105,16 @@ public class PropertyDaoImpl implements PropertyDAO
 	@Override
 	public Property getPropertyById(Long id) 
 	{
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
-		{
-            return session.get(Property.class, id);
-        }
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+	        return session.createQuery("SELECT p FROM Property p " +
+	            "LEFT JOIN FETCH p.images " +
+	            "LEFT JOIN FETCH p.user " +
+	            "WHERE p.id = :id",
+	            Property.class
+	        ).setParameter("id", id)
+	         .uniqueResult();
+	    }
 	}
 	
 	@Override
@@ -152,12 +158,100 @@ public class PropertyDaoImpl implements PropertyDAO
 
 
 	@Override
+	public List<Property> searchApprovedProperties(String city, String type, String purpose,Integer minBedrooms) 
+	{
+
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+	        StringBuilder hql = new StringBuilder(
+	            "SELECT DISTINCT p FROM Property p " +
+	            "LEFT JOIN FETCH p.images " +
+	            "WHERE p.verification = :status"
+	        );
+
+	        if (city != null && !city.isEmpty()) {
+	            hql.append(" AND p.city = :city");
+	        }
+
+	        if (type != null && !type.isEmpty()) {
+	            hql.append(" AND p.propertyType = :type");
+	        }
+
+	        if (minBedrooms != null) {
+	            hql.append(" AND p.bedrooms >= :minBedrooms");
+	        }
+
+	        Query query =
+	            session.createQuery(hql.toString(), Property.class);
+
+	        query.setParameter("status", PropertyVerificationStatus.APPROVED);
+
+	        if (city != null && !city.isEmpty()) {
+	            query.setParameter("city", city);
+	        }
+
+	        if (type != null && !type.isEmpty()) {
+	            query.setParameter("type", type);
+	        }
+
+	        if (minBedrooms != null) {
+	            query.setParameter("minBedrooms", minBedrooms);
+	        }
+
+	        return query.getResultList(); // images loaded here
+	    }
+		catch (Exception e) 
+		{
+			  e.printStackTrace();
+			  return Collections.emptyList();
+	    }
+	}
+
+
+	@Override
+	public List<Property> findByStatus(PropertyVerificationStatus status) {
+
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+		{
+			 Query query = session.createQuery( "SELECT DISTINCT p FROM Property p " +
+					    "LEFT JOIN FETCH p.images " +
+					    "WHERE p.verification = :status",Property.class);
+			 query.setParameter("status",status);
+			  
+			  return query.getResultList();
+
+		}
+		catch (Exception e) 
+		{
+			  e.printStackTrace();
+			  return Collections.emptyList();
+	    }
+	}
+
+
+	@Override
+	public List<Property> getPropertiesByUser(User user) 
+	{
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+		{
+	        Query query=session.createQuery(
+	            "FROM Property p WHERE p.user.id = :userId",
+	            Property.class);
+	        
+	        query.setParameter("userId", user.getId());
+	        return query.getResultList();
+	    }
+	}
+	
+	@Override
 	public List<Property> searchProperties(String city, String type, Integer minBedrooms) 
 	{
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-			StringBuilder hql=new StringBuilder("from Property where 1=1");
+			StringBuilder hql=new StringBuilder( "SELECT DISTINCT p FROM Property p " +
+				    "LEFT JOIN FETCH p.images " +
+				    "WHERE 1=:1");
 			
 			if(city!=null && !city.isEmpty())
 			{
@@ -203,40 +297,6 @@ public class PropertyDaoImpl implements PropertyDAO
 			  return Collections.emptyList();
 	    }
 		return Collections.emptyList();
-	}
-
-
-	@Override
-	public List<Property> findByStatus(PropertyVerificationStatus status) {
-
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
-		{
-			 Query query = session.createQuery("FROM Property WHERE verification = :status"	,Property.class);
-			 query.setParameter("status",status);
-			  
-			  return query.getResultList();
-
-		}
-		catch (Exception e) 
-		{
-			  e.printStackTrace();
-			  return Collections.emptyList();
-	    }
-	}
-
-
-	@Override
-	public List<Property> getPropertiesByUser(User user) 
-	{
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
-		{
-	        Query query=session.createQuery(
-	            "FROM Property p WHERE p.user.id = :userId",
-	            Property.class);
-	        
-	        query.setParameter("userId", user.getId());
-	        return query.getResultList();
-	    }
 	}
 
 

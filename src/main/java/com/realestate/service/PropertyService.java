@@ -16,12 +16,13 @@ public interface PropertyService
      public List<Property> findByStatus(PropertyVerificationStatus status);
 	 public List<Property> getAllProperties();
      public List<Property> getPropertiesByTypeAndPurpose(String type, String purpose);
-     public List<Property> searchProperties(String city, String type, Integer minBedrooms);
+     public List<Property> searchApprovedProperties(String city, String type,String purpose, Integer minBedrooms);
      List<Property> getApprovedProperties();
      List<Property> getPendingProperties();
      boolean approveProperty(Long propertyId);
      boolean rejectProperty(Long propertyId);
-     
+ 	public List<Property> searchProperties(String city, String type, Integer minBedrooms) ;
+
      
 
 }

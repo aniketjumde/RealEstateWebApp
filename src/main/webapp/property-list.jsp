@@ -1,6 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.realestate.model.Property" %>
 
+<!DOCTYPE html>
 <html>
 <head>
 <title>Properties</title>
@@ -30,8 +32,6 @@ body {
     .property-grid {
         grid-template-columns: 1fr;
     }
-}
-
 }
 
 .property-card {
@@ -103,13 +103,17 @@ body {
 
 <body>
 
+<!-- 🔍 SEARCH BAR -->
+
 <h2 style="padding-left:20px;">Properties</h2>
 
 <%
-List<Property> properties = (List<Property>) request.getAttribute("list");
+List<Property> properties =
+    (List<Property>) request.getAttribute("properties");
+
 if (properties == null || properties.isEmpty()) {
 %>
-<p style="padding:20px;">No properties found</p>
+    <p style="padding:20px;">No properties found</p>
 <%
 } else {
 %>
@@ -120,21 +124,23 @@ if (properties == null || properties.isEmpty()) {
 for (Property property : properties) {
 %>
 
+<a href="property-details?id=<%= property.getId() %>"
+   style="text-decoration:none; color:inherit;">
+
 <div class="property-card">
 
     <div class="property-image">
         <%
-		if (property.getImages() != null && !property.getImages().isEmpty()) {
-		%>
-		    <img src="property-image?id=<%= property.getImages().get(0).getImageId()%>">
-		<%
-		} else {
-		%>
-		    <img src="default.jpg">
-		<%
-		}
-		%>
-
+        if (property.getImages() != null && !property.getImages().isEmpty()) {
+        %>
+            <img src="property-image?id=<%= property.getImages().get(0).getImageId() %>">
+        <%
+        } else {
+        %>
+            <img src="default.jpg">
+        <%
+        }
+        %>
 
         <div class="badge"><%= property.getPropetystatus() %></div>
         <div class="price">₹ <%= property.getPrice() %></div>
@@ -146,12 +152,13 @@ for (Property property : properties) {
 
         <div class="property-meta">
             <span>🛏 <%= property.getBedrooms() %></span>
-            <span> <%= property.getBathrooms() %></span>
+            <span>🛁 <%= property.getBathrooms() %></span>
             <span><%= property.getAreaSqarefit() %> sqft</span>
         </div>
     </div>
 
 </div>
+</a>
 
 <%
 }

@@ -57,10 +57,10 @@ public class PropertyServiceImpl implements PropertyService
 	}
 
 	@Override
-	public List<Property> searchProperties(String city, String type, Integer minBedrooms) 
+	public List<Property> searchApprovedProperties(String city, String type,String purpose, Integer minBedrooms) 
 	{
 		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
-		return propertiesDao.searchProperties(city, type, minBedrooms);
+		return propertiesDao.searchApprovedProperties(city, type,purpose, minBedrooms);
 	}
 
 	@Override
@@ -117,6 +117,13 @@ public class PropertyServiceImpl implements PropertyService
 	public List<Property> getPropertiesByUser(User user) {
 		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance();
 		return propertiesDao.getPropertiesByUser(user);
+	}
+
+	@Override
+	public List<Property> searchProperties(String city, String type, Integer minBedrooms) 
+	{
+		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
+		return propertiesDao.searchProperties(city, type, minBedrooms);
 	}
 
 	

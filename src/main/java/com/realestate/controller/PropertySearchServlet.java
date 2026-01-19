@@ -29,19 +29,33 @@ public class PropertySearchServlet extends HttpServlet
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String city=request.getParameter("city");
-		String type=request.getParameter("tyoe");
+		String city = request.getParameter("city");
+        String type = request.getParameter("type");
         String purpose = request.getParameter("purpose");
+        Integer bedroomsStr = parseInt(request.getParameter("bedrooms"));
 
+        boolean isSearch =(city != null && !city.isEmpty()) ||
+        	    		  (type != null && !type.isEmpty()) ||
+        	              (purpose != null && !purpose.isEmpty()) ||
+        	              (bedroomsStr != null );
 
-        Integer minBedrooms = parseInt(request.getParameter("bedrooms"));
-        Double maxPrice = parseDouble(request.getParameter("maxPrice"));
-        
-        List<Property> properties=propertyService.searchProperties(city, type, minBedrooms);
-        request.setAttribute("list", properties);
-        request.getRequestDispatcher("property-list.jsp")
-        .forward(request, response);
+        if (isSearch)
+        {
+        		
+        	    request.setAttribute("properties",propertyService.searchApprovedProperties(city, type, purpose,bedroomsStr));
+		}
+         else 
+        {
+            //  only Show Approved Property by Admin
+            request.setAttribute("properties",
+                propertyService.getApprovedProperties()
+            );
+        }
+
+        request.getRequestDispatcher("search-bar.jsp")
+               .forward(request, response);
 	}
+
 
 	
 	private Double parseDouble(String value) 
