@@ -1,8 +1,6 @@
 package com.realestate.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.realestate.enums.PropertyVerificationStatus;
 import com.realestate.factory.PropertyServiceFactory;
@@ -112,11 +110,14 @@ public class PropertyServlet extends HttpServlet
             // Redirect
             response.sendRedirect("add-property.jsp");
 
-        } catch (Exception e) {
+        } catch (Exception e) 
+        {
             e.printStackTrace();
             request.setAttribute("error", "Failed to save property");
             request.getRequestDispatcher("jsp/add-property.jsp").forward(request, response);
         }
+        
+       
     }
 
     private int parseInt(String value) {

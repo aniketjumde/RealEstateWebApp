@@ -16,11 +16,13 @@ public class DashboardServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         
         HttpSession session = request.getSession(false);
         
-        if (session == null || session.getAttribute("user") == null) {
+        if (session == null || session.getAttribute("user") == null) 
+        {
             response.sendRedirect(request.getContextPath() + "/login.jsp");
             return;
         }
@@ -28,7 +30,8 @@ public class DashboardServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String role = user.getRole().name();
         
-        if (role.equals("ADMIN")) {
+        if (role.equals("ADMIN")) 
+        {
             request.getRequestDispatcher("/admin-dashboard.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/user-dashboard.jsp").forward(request, response);

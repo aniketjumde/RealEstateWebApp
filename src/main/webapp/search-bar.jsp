@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.realestate.model.Property" %>
+<%@ page import="com.realestate.model.User" %>
+<%@ page import="com.realestate.enums.PropertyVerificationStatus" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,14 +13,15 @@
 </head>
 <style>
 
-
 body 
 {
     font-family: Arial, sans-serif;
     background: #f8f9fa;
 }
 
-.property-grid {
+/* GRID */
+.property-grid
+{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -39,18 +42,21 @@ body
     }
 }
 
+/* CARD */
 .property-card {
     background: #fff;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .property-card:hover {
     transform: translateY(-5px);
 }
 
+/* IMAGE */
 .property-image {
     position: relative;
     height: 200px;
@@ -82,6 +88,7 @@ body
     font-weight: bold;
 }
 
+/* BODY */
 .property-body {
     padding: 15px;
 }
@@ -103,6 +110,25 @@ body
     font-size: 13px;
     color: #555;
 }
+
+/* ACTIONS */
+.property-actions {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 15px;
+}
+
+.property-actions a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.property-actions a.delete {
+    color: red;
+}        
 </style>
 </head>
 <body>
@@ -140,8 +166,8 @@ body
 	
 
 <%
-List<Property> properties =
-    (List<Property>) request.getAttribute("properties");
+List<Property> properties =(List<Property>) request.getAttribute("properties");
+User loggedUser = (User) session.getAttribute("user");
 
 if (properties == null || properties.isEmpty()) {
 %>
@@ -189,6 +215,29 @@ for (Property property : properties) {
             <span>🛁 <%= property.getBathrooms() %></span>
             <span><%= property.getAreaSqarefit() %> sqft</span>
         </div>
+        
+        <!-- ACTIONS (ONLY OWNER) -->
+        <%
+		if (loggedUser != null &&
+		    property.getUser() != null &&
+		    property.getUser().getId().equals(loggedUser.getId()) &&
+		    property.getVerification() != PropertyVerificationStatus.REJECTED &&
+		    property.getVerification() != PropertyVerificationStatus.SOLD)
+		{
+		%>
+		
+		<div class="property-actions">
+		    <a href="property-edit?id=<%= property.getId() %>"
+		       onclick="event.stopPropagation();">✏ Edit</a>
+		
+		    <a href="property-delete?id=<%= property.getId() %>"
+		       onclick="event.stopPropagation(); return confirm('Are you sure?');"
+		       class="delete">🗑 Delete</a>
+		</div>
+		
+		<%
+		}
+		%>
     </div>
 
 </div>

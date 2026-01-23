@@ -196,8 +196,8 @@ public class Property
 		return areaSqarefit;
 	}
 
-	public void setAreaSqarefit(Integer areaSqarefit) {
-		this.areaSqarefit = areaSqarefit;
+	public void setAreaSqarefit(Integer d) {
+		this.areaSqarefit = d;
 	}
 
 	public String getPropetystatus() {
