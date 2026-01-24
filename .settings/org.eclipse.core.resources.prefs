@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/admin-dashboard.jsp=UTF-8
 encoding//src/main/webapp/property-list.jsp=UTF-8
 encoding//src/main/webapp/user-dashboard.jsp=UTF-8
+encoding//src/main/webapp/user-properties.jsp=UTF-8
 encoding/<project>=UTF-8

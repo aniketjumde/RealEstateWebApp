@@ -21,11 +21,15 @@ public class UserDaoImpl implements UserDAO
 	    try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 	    {
 	        transaction = session.beginTransaction();
-	        if (user.getId() == null) {
+	       if(user.getId()==null)
+	       {
 	            session.persist(user);
-	        } else {
-	            user = session.merge(user);
-	        }
+	       }
+	       else
+	       {
+	            session.merge(user);
+
+	       }
 	        transaction.commit();
 	        return user;
 	    } 
@@ -105,6 +109,28 @@ public class UserDaoImpl implements UserDAO
 		{
             return session.createQuery("FROM User", User.class).list();
         }
+	}
+
+	@Override
+	public void updateUser(User user) 
+	{
+
+		Transaction transaction = null;
+	    try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+	    {
+	        transaction = session.beginTransaction();
+	       
+	            session.merge(user);
+	       
+	        transaction.commit();
+	    } 
+	    catch (Exception e) 
+	    {
+	        if (transaction != null) transaction.rollback();
+	        e.printStackTrace();
+
+	    }
+	    
 	}
 
 }

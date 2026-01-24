@@ -12,6 +12,7 @@ public interface UserService
 	public User findByFirebaseUid(String firebaseUid);
 	public void updateUserRole(String email, Role role);
     public List<User> getAllUsers();
+	public void updateUser(User user);
 
 
 }

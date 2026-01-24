@@ -11,6 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard</title>
+    
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; }
@@ -40,9 +41,11 @@
         
     </div>
     
+   
+    
     <!-- LINK TO ADD PROPERTY PAGE -->
     <a href="add-property.jsp">➕ Add Property</a>
-        <a href="property-list.jsp">Property Details</a>
+        <a href="profile.jsp">Profile info</a>
     
 </body>
 </html>

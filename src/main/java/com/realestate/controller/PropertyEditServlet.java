@@ -113,9 +113,10 @@ public class PropertyEditServlet extends HttpServlet
 	        propertyService.updateProperty(property);
 
 	        session.setAttribute("successMessage",
-	            "Property updated and sent for admin approval");
+	        	    "Property updated successfully and sent for admin approval");
 
-	        response.sendRedirect("property-details?id=" + id);
+	        	//  always redirect to user-properties
+	        	response.sendRedirect(request.getContextPath() + "/user-properties");
 	    }
 	}
 

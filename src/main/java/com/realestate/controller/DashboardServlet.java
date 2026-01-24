@@ -32,9 +32,9 @@ public class DashboardServlet extends HttpServlet {
         
         if (role.equals("ADMIN")) 
         {
-            request.getRequestDispatcher("/admin-dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/dashboard").forward(request, response);
         } else {
-            request.getRequestDispatcher("/user-dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("/user/dashboard").forward(request, response);
         }
     }
 }

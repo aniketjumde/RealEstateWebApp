@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
  
 @WebServlet("/property-delete")
@@ -31,8 +32,12 @@ public class PropertyDeleteServlet extends HttpServlet
 		Long id=Long.parseLong(request.getParameter("id"));
 		
 		propertyService.deleteProperty(id);
-		response.sendRedirect("property");
-	}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("successMessage", "Property deleted successfully");
+
+		//   redirect to user-properties
+		response.sendRedirect(request.getContextPath() + "/user-properties");	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

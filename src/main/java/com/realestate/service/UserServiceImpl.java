@@ -45,4 +45,11 @@ public class UserServiceImpl implements UserService
 		return userDao.findAll();
 	}
 
+	@Override
+	public void updateUser(User user) 
+	{
+		user.setName(user.getName().toLowerCase());
+		userDao.updateUser(user);
+	}
+
 }

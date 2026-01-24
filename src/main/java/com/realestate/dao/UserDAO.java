@@ -13,4 +13,5 @@ public interface UserDAO
 	 public Optional<User> findByFirebaseUid(String firebaseUid);
 	 public void updateRole(String email, Role role);
 	 public List<User> findAll();
+	 public void updateUser(User user);
 }

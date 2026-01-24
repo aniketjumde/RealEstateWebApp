@@ -215,29 +215,7 @@ for (Property property : properties) {
             <span>🛁 <%= property.getBathrooms() %></span>
             <span><%= property.getAreaSqarefit() %> sqft</span>
         </div>
-        
-        <!-- ACTIONS (ONLY OWNER) -->
-        <%
-		if (loggedUser != null &&
-		    property.getUser() != null &&
-		    property.getUser().getId().equals(loggedUser.getId()) &&
-		    property.getVerification() != PropertyVerificationStatus.REJECTED &&
-		    property.getVerification() != PropertyVerificationStatus.SOLD)
-		{
-		%>
-		
-		<div class="property-actions">
-		    <a href="property-edit?id=<%= property.getId() %>"
-		       onclick="event.stopPropagation();">✏ Edit</a>
-		
-		    <a href="property-delete?id=<%= property.getId() %>"
-		       onclick="event.stopPropagation(); return confirm('Are you sure?');"
-		       class="delete">🗑 Delete</a>
-		</div>
-		
-		<%
-		}
-		%>
+       
     </div>
 
 </div>

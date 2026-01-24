@@ -39,5 +39,7 @@
         <h2>Administration Panel</h2>
         <p>Manage users, properties, and system settings from here.</p>
     </div>
-</body>
+    
+    <a href="add-property.jsp">➕ Add Property</a>
+        <a href="profile.jsp">Profile info</a>
 </html>
