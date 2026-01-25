@@ -1,8 +1,12 @@
 package com.realestate.model;
 
 
+import com.realestate.enums.InquiryStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,14 +40,16 @@ public class Inquiry
     @Column(name = "message")
     private String message;
     
-    @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private InquiryStatus status;
+
+    //Constructor
 	
     public Inquiry() {}
 
-    
-    
-	public Inquiry(Long inquiryId, Property property, User sender, User receiver, String message, String status) {
+	public Inquiry(Long inquiryId, Property property, User sender, User receiver, String message,
+			InquiryStatus status) {
 		super();
 		this.inquiryId = inquiryId;
 		this.property = property;
@@ -53,8 +59,8 @@ public class Inquiry
 		this.status = status;
 	}
 
-
-
+	 //Setter and Getter
+	
 	public Long getInquiryId() {
 		return inquiryId;
 	}
@@ -95,13 +101,15 @@ public class Inquiry
 		this.message = message;
 	}
 
-	public String getStatus() {
+	public InquiryStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(InquiryStatus status) {
 		this.status = status;
 	}
+
+   
     
     
 }

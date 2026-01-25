@@ -1,53 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.realestate.model.User" %>
+
+<%
+    User loggedUser = (User) session.getAttribute("user");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<title>RealEstate</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+    .navbar-brand {
+        font-weight: bold;
+        color: #0d6efd;
+    }
+</style>
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
 
-    <!-- Mobile toggle -->
+    <!-- Logo -->
+    <a class="navbar-brand" href="index.jsp">🏠 RealEstate</a>
+
+    <!-- Mobile Toggle -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarNav" aria-controls="navbarNav"
-      aria-expanded="false" aria-label="Toggle navigation">
+      data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Navbar content -->
+    <!-- Menu -->
     <div class="collapse navbar-collapse" id="navbarNav">
 
-      <!-- Center menu -->
-      <ul class="navbar-nav mx-auto justify-content-center">
+      <!-- Center Menu -->
+      <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home</a>
+          <a class="nav-link" href="index.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="property">Property</a>
+          <a class="nav-link" href="property">Properties</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About us</a>
+          <a class="nav-link" href="about.jsp">About</a>
         </li>
       </ul>
 
-      <!-- Right side Sign In -->
-      <div class="ms-auto">
-        <a href="login.jsp" class="btn btn-outline-primary">Sign In</a>
-      </div>
+      <!-- Right Side -->
+      <ul class="navbar-nav ms-auto">
+
+        <% if (loggedUser == null) { %>
+          <!-- Guest -->
+          <li class="nav-item">
+            <a class="nav-link" href="login.jsp">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary ms-2" href="register.jsp">Register</a>
+          </li>
+
+        <% } else { %>
+          <!-- Logged User -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+               data-bs-toggle="dropdown">
+               👤 <%= loggedUser.getName() %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="dashboard">Dashboard</a></li>
+              <li><a class="dropdown-item" href="profile.jsp">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="logout">Logout</a></li>
+            </ul>
+          </li>
+        <% } %>
+
+      </ul>
 
     </div>
   </div>
 </nav>
-
 
 </body>
 </html>

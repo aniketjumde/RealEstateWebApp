@@ -1,4 +1,6 @@
 <%@ page import="com.realestate.model.User" %>
+<%@ include file="/Header.jsp" %>
+
 <%
     User user = (User) session.getAttribute("user");
     if (user == null) {
