@@ -161,10 +161,20 @@
             </div>
         </div>
 
-        <label>Area (sqft)</label>
-        <input type="number" name="area"
-               value="<%= property.getAreaSqarefit() %>">
-
+		<div class="row">
+		 	<div>
+                <label>Status</label>
+                <select name="status">
+                    <option>Available</option>
+                    <option>Sold</option>
+                </select>
+            </div>
+			<div>
+		        <label>Area (sqft)</label>
+		        <input type="number" name="area"
+		               value="<%= property.getAreaSqarefit() %>">
+	         </div>
+		</div>
         <!-- LOCATION -->
         <label>City</label>
         <input type="text" name="city"

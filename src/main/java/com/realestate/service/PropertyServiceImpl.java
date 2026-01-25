@@ -10,20 +10,23 @@ import com.realestate.model.User;
 
 public class PropertyServiceImpl implements PropertyService 
 {
-
+	private PropertyDAO propertiesDao;
+	
+	public PropertyServiceImpl()
+	{
+		 propertiesDao=PropertyDaoFactory.getDaoInstance();
+	}
 	
 
 	@Override
 	public Property addProperty(Property property) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		return propertiesDao.save(property);
 	}
 
 	@Override
 	public void updateProperty(Property property) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance();
 		propertiesDao.updateProperty(property);
 
 	}
@@ -31,42 +34,36 @@ public class PropertyServiceImpl implements PropertyService
 	@Override
 	public void deleteProperty(Long id) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		propertiesDao.deleteProperty(id);
 	}
 
 	@Override
 	public  Property getPropertyById(Long id) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		return propertiesDao.getPropertyById(id);
 	}
 
 	@Override
 	public List<Property> getAllProperties() 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		return propertiesDao.getAllProperties();
 	}
 
 	@Override
 	public List<Property> getPropertiesByTypeAndPurpose(String type, String purpose) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		return propertiesDao.getPropertiesByTypeAndPurpose(type, purpose);
 	}
 
 	@Override
 	public List<Property> searchApprovedProperties(String city, String type,String purpose, Integer minBedrooms) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		return propertiesDao.searchApprovedProperties(city, type,purpose, minBedrooms);
 	}
 
 	@Override
 	public List<Property> findByStatus(PropertyVerificationStatus status) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		
 		return propertiesDao.findByStatus(status);
 	}
@@ -74,7 +71,6 @@ public class PropertyServiceImpl implements PropertyService
 	@Override
 	public List<Property> getApprovedProperties() 
 	{	
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
         return propertiesDao.findByStatus(PropertyVerificationStatus.APPROVED);
 
 	}
@@ -82,14 +78,12 @@ public class PropertyServiceImpl implements PropertyService
 	@Override
 	public List<Property> getPendingProperties() 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
-        return propertiesDao.findByStatus(PropertyVerificationStatus.PENDING);
+        return propertiesDao.getPendingProperties();
 	}
 
 	@Override
 	public boolean approveProperty(Long propertyId) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance();
 		Property property=propertiesDao.getPropertyById(propertyId);
 		if (property != null) {
             property.setVerification(PropertyVerificationStatus.APPROVED);
@@ -103,7 +97,6 @@ public class PropertyServiceImpl implements PropertyService
 	@Override
 	public boolean rejectProperty(Long propertyId) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance();
 		Property property=propertiesDao.getPropertyById(propertyId);
 		if (property != null) {
             property.setVerification(PropertyVerificationStatus.REJECTED);
@@ -114,16 +107,71 @@ public class PropertyServiceImpl implements PropertyService
 	}
 
 	@Override
-	public List<Property> getPropertiesByUser(User user) {
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance();
-		return propertiesDao.getPropertiesByUser(user);
+	public List<Property> getPropertiesByUser(User user) 
+	{
+			return propertiesDao.getPropertiesByUser(user);
 	}
 
 	@Override
 	public List<Property> searchProperties(String city, String type, Integer minBedrooms) 
 	{
-		PropertyDAO propertiesDao=PropertyDaoFactory.getDaoInstance(); 
 		return propertiesDao.searchProperties(city, type, minBedrooms);
+	}
+
+	@Override
+	public long getTotalPropertiesByUser(Long userId) 
+	{
+		return propertiesDao.getTotalPropertiesByUser(userId);
+	}
+
+	@Override
+	public long getApprovedPropertiesByUser(Long userId) 
+	{
+		
+		return propertiesDao.getApprovedPropertiesByUser(userId);
+	}
+
+	@Override
+	public long getPendingPropertiesByUser(Long userId) 
+	{
+		return propertiesDao.getPendingPropertiesByUser(userId);
+	}
+
+	@Override
+	public long getRejectedPropertiesByUser(Long userId) 
+	{
+		return propertiesDao.getRejectedPropertiesByUser(userId);
+	}
+
+
+	
+
+
+	@Override
+	public long getTotalProperties() 
+	{
+		return propertiesDao.getTotalProperties();
+	}
+
+
+	@Override
+	public long getPendingPropertiesCount() 
+	{
+		return propertiesDao.getPendingPropertiesCount();
+	}
+
+
+	@Override
+	public long getApprovedPropertiesCount() 
+	{
+		return propertiesDao.getApprovedPropertiesCount();
+	}
+
+
+	@Override
+	public long getRejectedPropertiesCount() 
+	{
+		return propertiesDao.getRejectedPropertiesCount();
 	}
 
 	

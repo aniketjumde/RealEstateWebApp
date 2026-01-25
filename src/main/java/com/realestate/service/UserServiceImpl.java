@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService
 	{
 		return userDao.findByFirebaseUid(firebaseUid).orElse(null);
 	}
-
 	@Override
 	public void updateUserRole(String email, Role role) 
 	{
@@ -51,5 +50,36 @@ public class UserServiceImpl implements UserService
 		user.setName(user.getName().toLowerCase());
 		userDao.updateUser(user);
 	}
+
+	@Override
+	public long getTotalUsers() 
+	{
+		
+		return userDao.getTotalUsers();
+	}
+
+	@Override
+	public void updateRole(Long userId, Role role) 
+	{
+		User user = userDao.findById(userId);
+
+	    if (user != null) 
+	    {
+	        user.setRole(role);
+	        userDao.updateUser(user);
+	    }
+	}
+
+	@Override
+	public void deleteUser(Long userId) 
+	{
+		User user=userDao.findById(userId);
+		
+		userDao.deleteUser(user);
+	}
+
+	
+
+	
 
 }

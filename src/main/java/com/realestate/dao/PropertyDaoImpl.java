@@ -300,6 +300,193 @@ public class PropertyDaoImpl implements PropertyDAO
 	}
 
 
+	@Override
+	public long getTotalPropertiesByUser(Long userId) 
+	{
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+        {
+
+            Query query = session.createQuery(
+                "SELECT COUNT(p.id) FROM Property p WHERE p.user.id = :userId",
+                Long.class
+            );
+
+            query.setParameter("userId", userId);
+            return (long) query.getSingleResult();
+
+        } catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public long getApprovedPropertiesByUser(Long userId) 
+    {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+        {
+
+            Query query = session.createQuery(
+                "SELECT COUNT(p.id) FROM Property p " +
+                "WHERE p.user.id = :userId AND p.verification = :status",
+                Long.class
+            );
+
+            query.setParameter("userId", userId);
+            query.setParameter("status", PropertyVerificationStatus.APPROVED);
+
+            return (long) query.getSingleResult();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public long getPendingPropertiesByUser(Long userId)
+    {
+        try (Session session = HibernateUtil.getSessionFactory().openSession())
+        {
+
+            Query query = session.createQuery(
+                "SELECT COUNT(p.id) FROM Property p " +
+                "WHERE p.user.id = :userId AND p.verification = :status",
+                Long.class
+            );
+
+            query.setParameter("userId", userId);
+            query.setParameter("status", PropertyVerificationStatus.PENDING);
+
+            return (long) query.getSingleResult();
+
+        } 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public long getRejectedPropertiesByUser(Long userId) 
+    {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+        {
+
+            Query query = session.createQuery(
+                "SELECT COUNT(p.id) FROM Property p " +
+                "WHERE p.user.id = :userId AND p.verification = :status",
+                Long.class
+            );
+
+            query.setParameter("userId", userId);
+            query.setParameter("status", PropertyVerificationStatus.REJECTED);
+
+            return (long) query.getSingleResult();
+
+        } 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+	
+	
+
+	@Override
+	public long getTotalProperties() 
+	{
+		try (Session session = HibernateUtil.getSessionFactory().openSession())
+        {
+            Query query = session.createQuery("SELECT COUNT(p) FROM Property p " ,Long.class);
+
+            return (long) query.getSingleResult();
+        } 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return 0;
+	}
+
+	@Override
+	public long getPendingPropertiesCount() 
+	{
+		try (Session session = HibernateUtil.getSessionFactory().openSession())
+        {
+
+            Query query = session.createQuery("SELECT COUNT(*) FROM Property p WHERE  p.verification = :status" ,Long.class);
+            query.setParameter("status",PropertyVerificationStatus.PENDING);
+            return (long) query.getSingleResult();
+
+        } 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return 0;
+	}
+
+
+	@Override
+	public long getApprovedPropertiesCount() 
+	{
+		try (Session session = HibernateUtil.getSessionFactory().openSession())
+        {
+
+            Query query = session.createQuery("SELECT COUNT(*) FROM Property p WHERE  p.verification = :status" ,Long.class);
+            query.setParameter("status",PropertyVerificationStatus.APPROVED);
+            return (long) query.getSingleResult();
+
+        } 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+		return 0;
+	}
+
+
+	@Override
+	public long getRejectedPropertiesCount() 
+	{
+		try (Session session = HibernateUtil.getSessionFactory().openSession())
+        {
+
+            Query query = session.createQuery("SELECT COUNT(*) FROM Property p WHERE  p.verification = :status" ,Long.class);
+            query.setParameter("status",PropertyVerificationStatus.REJECTED);
+            return (long) query.getSingleResult();
+
+        } 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+		return 0;
+	}
+
+
+	@Override
+	public List<Property> getPendingProperties() 
+	{
+		 try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+		 {
+
+		        return session.createQuery(
+		            "select p from Property p " +
+		            "join fetch p.user " +
+		            "where p.verification = :status",
+		            Property.class
+		        )
+		        .setParameter("status", PropertyVerificationStatus.PENDING)
+		        .getResultList();
+
+		    }
+	}
+
+
 	
 
 }

@@ -1,5 +1,6 @@
 package com.realestate.dao;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,8 +108,21 @@ public class UserDaoImpl implements UserDAO
 	{
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-            return session.createQuery("FROM User", User.class).list();
-        }
+			List<User> users = session.createQuery(
+	                "FROM User u ORDER BY u.createdAt DESC",
+	                User.class
+	        ).getResultList();
+
+	       
+	        return users;
+
+		} 
+		catch (Exception e) 
+		{
+		        e.printStackTrace();
+		}
+		
+		  return Collections.emptyList();
 	}
 
 	@Override
@@ -132,5 +146,61 @@ public class UserDaoImpl implements UserDAO
 	    }
 	    
 	}
+	
+	public long getTotalUsers() 
+	{
+		try (Session session = HibernateUtil.getSessionFactory().openSession())
+        {
+
+            Query query = session.createQuery("SELECT COUNT(*) FROM User " ,Long.class);
+
+            return (long) query.getSingleResult();
+
+        } 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return 0;
+	}
+
+	@Override
+	public User findById(Long userId) 
+	{
+		
+		try (Session session = HibernateUtil.getSessionFactory().openSession();)
+		{	       
+	        User user = session.get(User.class, userId);
+	        
+	        return user;
+		}
+		catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+		
+		return null;
+	}
+
+	@Override
+	public void deleteUser(User user) 
+	{
+		Transaction transaction=null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession();)
+		{	
+			transaction=session.beginTransaction();
+	        session.remove(user);
+	        transaction.commit();
+		}
+		catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+		
+	}
+
+	
+	
+
 
 }

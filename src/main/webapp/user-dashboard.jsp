@@ -41,6 +41,16 @@
         
     </div>
     
+    <h2>User Dashboard</h2>
+
+	<div>
+	    <p>Total Properties: ${totalProperties}</p>
+	    <p>Approved: ${approvedCount}</p>
+	    <p>Pending: ${pendingCount}</p>
+	    <p>Rejected: ${rejectedCount}</p>
+		</div>
+    
+    
    
     
     <!-- LINK TO ADD PROPERTY PAGE -->

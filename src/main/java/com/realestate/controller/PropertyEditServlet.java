@@ -101,6 +101,7 @@ public class PropertyEditServlet extends HttpServlet
 	        property.setPrice(Double.parseDouble(request.getParameter("price")));
 	        property.setCity(request.getParameter("city"));
 	        property.setState(request.getParameter("state"));
+            property.setPropetystatus(request.getParameter("status"));
 	        property.setAreaSqarefit(Integer.parseInt(request.getParameter("area")));
 	        property.setBedrooms(Integer.parseInt(request.getParameter("bedrooms")));
 	        property.setBathrooms(Integer.parseInt(request.getParameter("bathrooms")));

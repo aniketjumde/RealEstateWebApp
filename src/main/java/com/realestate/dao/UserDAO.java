@@ -14,4 +14,9 @@ public interface UserDAO
 	 public void updateRole(String email, Role role);
 	 public List<User> findAll();
 	 public void updateUser(User user);
+	 public long getTotalUsers();
+	 public User findById(Long userId);
+	 public void deleteUser(User user);
+
+
 }

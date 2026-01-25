@@ -110,7 +110,8 @@ public class PropertyServlet extends HttpServlet
             // Redirect
             response.sendRedirect("add-property.jsp");
 
-        } catch (Exception e) 
+        } 
+        catch (Exception e) 
         {
             e.printStackTrace();
             request.setAttribute("error", "Failed to save property");

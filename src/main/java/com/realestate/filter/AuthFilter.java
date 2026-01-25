@@ -59,6 +59,17 @@ public class AuthFilter implements Filter {
                 return;
             }
         }
+        
+        if (path.startsWith("/admin/")) 
+        {
+            User user1 = (User) session.getAttribute("user");
+
+            if (user1 == null || user1.getRole() != Role.ADMIN) 
+            {
+                response.sendRedirect(request.getContextPath() + "/dashboard");
+                return;
+            }
+        }
 
         // ALLOW REQUEST
         chain.doFilter(req, res);

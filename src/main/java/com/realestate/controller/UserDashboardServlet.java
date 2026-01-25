@@ -38,12 +38,19 @@ public class UserDashboardServlet extends HttpServlet
             response.sendRedirect(request.getContextPath() + "/login.jsp");
             return;
         }
-		 // Load ONLY user data
-        request.setAttribute(
-            "myProperties",
-            propertyService.getPropertyById(user.getId())
-        );
+		
+        Long userId=user.getId();
+        
+     // Dashboard data
+        request.setAttribute("totalProperties",propertyService.getTotalPropertiesByUser(userId));
 
+        request.setAttribute("approvedCount",propertyService.getApprovedPropertiesByUser(userId));
+
+        request.setAttribute("pendingCount",propertyService.getPendingPropertiesByUser(userId));
+
+        request.setAttribute("rejectedCount",propertyService.getRejectedPropertiesByUser(userId));
+
+        
         request.getRequestDispatcher("/user-dashboard.jsp")
                .forward(request, response);	}
 

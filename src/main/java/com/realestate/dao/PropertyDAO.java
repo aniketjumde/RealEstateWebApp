@@ -16,10 +16,16 @@ public interface PropertyDAO
      public List<Property> getPropertiesByTypeAndPurpose(String type, String purpose);
      public List<Property> searchApprovedProperties(String city, String type,String purpose, Integer minBedrooms);
  	 public List<Property> findByStatus(PropertyVerificationStatus status); 
- 	public List<Property> getPropertiesByUser(User user);
-	public List<Property> searchProperties(String city, String type, Integer minBedrooms) ;
-	
-	 
-
+	 public List<Property> getPropertiesByUser(User user);
+	 public List<Property> getPendingProperties() ;
+	 public List<Property> searchProperties(String city, String type, Integer minBedrooms) ;
+	 public long getTotalPropertiesByUser(Long userId);
+     public long getApprovedPropertiesByUser(Long userId);
+     public long getPendingPropertiesByUser(Long userId);
+     public long getRejectedPropertiesByUser(Long userId);
+ 	 public long getTotalProperties();
+ 	 public long getPendingPropertiesCount();
+ 	 public long getApprovedPropertiesCount();
+ 	 public long getRejectedPropertiesCount();
 
 }

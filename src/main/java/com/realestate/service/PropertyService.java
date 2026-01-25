@@ -17,12 +17,17 @@ public interface PropertyService
 	 public List<Property> getAllProperties();
      public List<Property> getPropertiesByTypeAndPurpose(String type, String purpose);
      public List<Property> searchApprovedProperties(String city, String type,String purpose, Integer minBedrooms);
-     List<Property> getApprovedProperties();
-     List<Property> getPendingProperties();
+     public List<Property> getApprovedProperties();
+     public List<Property> getPendingProperties();
      boolean approveProperty(Long propertyId);
      boolean rejectProperty(Long propertyId);
- 	public List<Property> searchProperties(String city, String type, Integer minBedrooms) ;
-
-     
-
+ 	 public List<Property> searchProperties(String city, String type, Integer minBedrooms) ;
+ 	 public long getTotalPropertiesByUser(Long userId);
+ 	 public long getApprovedPropertiesByUser(Long userId);
+ 	 public long getPendingPropertiesByUser(Long userId);
+ 	 public long getRejectedPropertiesByUser(Long userId);
+ 	 public long getTotalProperties();
+ 	 public long getPendingPropertiesCount();
+ 	 public long getApprovedPropertiesCount();
+ 	 public long getRejectedPropertiesCount();
 }
