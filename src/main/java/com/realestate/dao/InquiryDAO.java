@@ -15,5 +15,8 @@ public interface InquiryDAO
 	 public Inquiry getInquiryById(Long inquiryId);
 
 	 public void updateInquiry(Inquiry inquiry);
+
+	 public long countReceivedInquiries(Long userId);
 	 
+	 public long countSentInquiries(Long userId);
 }

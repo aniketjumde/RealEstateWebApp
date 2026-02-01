@@ -32,19 +32,38 @@ public class PropertyServlet extends HttpServlet
     }
 
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		String city = request.getParameter("city");
+        String type = request.getParameter("type");
+        String purpose = request.getParameter("purpose");
+        Integer bedroomsStr = parseInt(request.getParameter("bedrooms"));
 
+        boolean isSearch =(city != null && !city.isEmpty()) ||
+        	    		  (type != null && !type.isEmpty()) ||
+        	              (purpose != null && !purpose.isEmpty()) ||
+        	              (bedroomsStr != null );
+
+        if (isSearch)
+        {
+        		
+        	    request.setAttribute("properties",propertyService.searchApprovedProperties(city, type, purpose,bedroomsStr));
+		}
+         else 
+        {
+            //  only Show Approved Property by Admin
             request.setAttribute("properties",
-                propertyService.getAllProperties()
+                propertyService.getApprovedProperties()
             );
-        
+        }
 
         request.getRequestDispatcher("property-list.jsp")
                .forward(request, response);
 	}
 
-        
+
+	
+	
     
     
     @Override
@@ -81,7 +100,7 @@ public class PropertyServlet extends HttpServlet
             property.setLatitude(request.getParameter("latitude"));
             property.setLongitude(request.getParameter("longitude"));
 
-            property.setVerification(PropertyVerificationStatus.APPROVED);
+            property.setVerification(PropertyVerificationStatus.PENDING);
             property.setUser(user);
 
 

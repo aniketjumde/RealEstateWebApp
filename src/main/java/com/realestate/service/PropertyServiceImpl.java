@@ -174,9 +174,14 @@ public class PropertyServiceImpl implements PropertyService
 		return propertiesDao.getRejectedPropertiesCount();
 	}
 
-	
 
-	
-	
+	@Override
+	public List<Property> getLatestApprovedProperties(int limit)
+	{
+		return propertiesDao.findLatestApproved(limit);
+
+	}
+
+
 	
 }

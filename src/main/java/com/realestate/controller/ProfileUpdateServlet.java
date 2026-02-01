@@ -29,10 +29,6 @@ public class ProfileUpdateServlet extends HttpServlet
 	}
 	
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -46,7 +42,7 @@ public class ProfileUpdateServlet extends HttpServlet
 	        }
 
 	        user.setName(request.getParameter("name"));
-
+	        System.out.println(request.getParameter("name"));
 	        userService.updateUser(user);
 
 	        session.setAttribute("user", user);

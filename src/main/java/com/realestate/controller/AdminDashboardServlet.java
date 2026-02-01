@@ -36,9 +36,9 @@ public class AdminDashboardServlet extends HttpServlet {
 		 	request.setAttribute("approvedProperties",propertyService.getApprovedPropertiesCount());
 		 	request.setAttribute("pendingProperties",propertyService.getPendingPropertiesCount());
 		 	request.setAttribute("rejectedProperties",propertyService.getRejectedPropertiesCount());
-
-        
-
+		 	request.setAttribute("pendingPropertiesList",propertyService.getPendingProperties());
+		 	request.setAttribute("recentUsers",userService.getAllUsers());
+		 	
 		 	request.getRequestDispatcher("/admin-dashboard.jsp")
                .forward(request, response);	}
 

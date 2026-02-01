@@ -235,8 +235,10 @@ public class PropertyDaoImpl implements PropertyDAO
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
 	        Query query=session.createQuery(
-	            "FROM Property p WHERE p.user.id = :userId",
-	            Property.class);
+	        		 		"SELECT DISTINCT p FROM Property p " +
+	        		            "LEFT JOIN FETCH p.images " +
+	        		            "WHERE p.user.id = :userId",
+	        		            Property.class);
 	        
 	        query.setParameter("userId", user.getId());
 	        return query.getResultList();
@@ -484,6 +486,29 @@ public class PropertyDaoImpl implements PropertyDAO
 		        .getResultList();
 
 		    }
+	}
+
+
+	@Override
+	public List<Property> findLatestApproved(int limit) 
+	{
+		try(Session session = HibernateUtil.getSessionFactory().openSession();)
+		{
+			List<Property> list = session.createQuery("SELECT DISTINCT p FROM Property p LEFT JOIN FETCH p.images WHERE p.verification = :status ORDER BY p.createdAt DESC",Property.class
+			    )
+			    .setParameter("status", PropertyVerificationStatus.APPROVED)
+			    .setMaxResults(limit)
+			    .getResultList();
+			
+			return list;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		
+		return Collections.emptyList();
 	}
 
 

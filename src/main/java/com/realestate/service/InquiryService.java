@@ -16,5 +16,8 @@ public interface InquiryService
 
 	 public void replyInquiry(Inquiry inquiry);
 
+	 public long countReceivedInquiries(Long userId);
+	 
+	 public long countSentInquiries(Long userId);
 
 }

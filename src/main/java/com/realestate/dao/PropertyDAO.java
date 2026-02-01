@@ -27,5 +27,6 @@ public interface PropertyDAO
  	 public long getPendingPropertiesCount();
  	 public long getApprovedPropertiesCount();
  	 public long getRejectedPropertiesCount();
+ 	 public List<Property> findLatestApproved(int limit);
 
 }

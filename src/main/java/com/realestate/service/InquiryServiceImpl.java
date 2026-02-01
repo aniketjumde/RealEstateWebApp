@@ -48,6 +48,20 @@ public class InquiryServiceImpl implements InquiryService
 		 inquiryDAO.updateInquiry(inquiry);	
 	}
 
+	@Override
+	public long countReceivedInquiries(Long userId) 
+	{
+		
+		return inquiryDAO.countReceivedInquiries(userId);
+	}
+
+	@Override
+	public long countSentInquiries(Long userId) 
+	{
+		
+		return inquiryDAO.countSentInquiries(userId);
+	}
+
 	
 	
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.realestate.model.Inquiry;
 import com.realestate.util.HibernateUtil;
@@ -114,5 +115,44 @@ public class InquiryDaoImpl implements InquiryDAO
 			 e.printStackTrace();
 		
 		 }
+	}
+
+	@Override
+	public long countReceivedInquiries(Long userId) 
+	{
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+        {
+
+            Query<Long> query = session.createQuery("SELECT COUNT(i) FROM Inquiry i WHERE i.receiver.id = :userId",Long.class);
+
+            query.setParameter("userId", userId);
+            return query.getSingleResult();
+
+        } catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        return 0;
+	}
+
+	@Override
+	public long countSentInquiries(Long userId) 
+	{
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+        {
+
+            Query<Long> query = session.createQuery("SELECT COUNT(i) FROM Inquiry i WHERE i.sender.id = :userId",Long.class);
+
+            query.setParameter("userId", userId);
+            return query.getSingleResult();
+
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        return 0;
 	}
 }
