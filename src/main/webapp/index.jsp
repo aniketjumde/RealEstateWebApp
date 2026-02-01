@@ -2,12 +2,11 @@
 <%@ page import="com.realestate.model.Property" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.realestate.model.User" %>
-<%@ include file="/Header.jsp" %>    
+<%@ include file="/Header.jsp" %>
 
 <%
     // Get featured properties from request attribute
     List<Property> featuredProperties = (List<Property>) request.getAttribute("featuredProperties");
-  	 loggedUser = (User) session.getAttribute("user"); // Added User type declaration
 %>
 
 <!DOCTYPE html>
@@ -499,7 +498,6 @@
                         <a href="index.jsp">Home</a>
                         <a href="property">Properties</a>
                         <a href="about.jsp">About Us</a>
-                        <a href="contact.jsp">Contact</a>
                     </div>
                 </div>
                 
@@ -509,7 +507,6 @@
                         <a href="dashboard">Dashboard</a>
                         <a href="profile.jsp">My Profile</a>
                         <a href="add-property.jsp">Add Property</a>
-                        <a href="buyer-inquires.jsp">My Inquiries</a>
                     </div>
                 </div>
                 
@@ -526,7 +523,7 @@
             <div class="row mt-5">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        &copy; 2024 RealEstate. All rights reserved. | <a href="#" class="text-light">Privacy Policy</a> | <a href="#" class="text-light">Terms of Service</a>
+                        &copy; 2026 RealEstate. All rights reserved. | <a href="#" class="text-light">Privacy Policy</a> | <a href="#" class="text-light">Terms of Service</a>
                     </div>
                 </div>
             </div>

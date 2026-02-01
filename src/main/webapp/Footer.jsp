@@ -146,7 +146,7 @@
         <div class="row mt-5">
             <div class="col-12">
                 <div class="copyright">
-                    &copy; 2024 RealEstate. All rights reserved.
+                    &copy; 2026 RealEstate. All rights reserved.
                 </div>
             </div>
         </div>

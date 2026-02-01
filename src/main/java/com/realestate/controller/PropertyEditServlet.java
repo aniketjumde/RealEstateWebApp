@@ -63,7 +63,7 @@ public class PropertyEditServlet extends HttpServlet
 
 
         request.setAttribute("property", property);
-        request.getRequestDispatcher("edit-property.jsp").forward(request, response);
+        request.getRequestDispatcher("/edit-property.jsp").forward(request, response);
 	}
 
 	
@@ -73,7 +73,7 @@ public class PropertyEditServlet extends HttpServlet
 		   HttpSession session = request.getSession(false);
 	       if (session == null || session.getAttribute("user") == null)
 	       {
-	            response.sendRedirect("login.jsp");
+	            response.sendRedirect("/login.jsp");
 	            return;
 	       }
 

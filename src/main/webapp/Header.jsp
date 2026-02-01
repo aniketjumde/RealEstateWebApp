@@ -205,7 +205,7 @@
         <% if (loggedUser == null) { %>
           <!-- Guest User -->
           <li class="nav-item">
-            <a class="btn btn-nav-primary" href="login.jsp">
+            <a class="btn btn-nav-primary"    href="login.jsp">	
               <i class="fas fa-sign-in-alt me-1"></i> Sign In
             </a>
           </li>

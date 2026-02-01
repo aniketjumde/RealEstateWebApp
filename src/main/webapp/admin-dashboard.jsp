@@ -1,10 +1,4 @@
-
 <%@ page import="com.realestate.model.User" %>
-
-<%
-   
-    List<User> recentUsers = (List<User>) request.getAttribute("recentUsers");
-%>
 
 <!DOCTYPE html>
 <html>

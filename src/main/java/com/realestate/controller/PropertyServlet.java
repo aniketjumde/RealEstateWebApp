@@ -57,7 +57,7 @@ public class PropertyServlet extends HttpServlet
             );
         }
 
-        request.getRequestDispatcher("property-list.jsp")
+        request.getRequestDispatcher("/property-list.jsp")
                .forward(request, response);
 	}
 
@@ -127,7 +127,7 @@ public class PropertyServlet extends HttpServlet
             successSession.setAttribute("successMessage", "Property added successfully");
 
             // Redirect
-            response.sendRedirect("add-property.jsp");
+            response.sendRedirect("pages/user/add-property.jsp");
 
         } 
         catch (Exception e) 

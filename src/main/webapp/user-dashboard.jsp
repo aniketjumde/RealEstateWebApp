@@ -16,7 +16,7 @@
     }
 
     String mode = request.getParameter("mode");
-    if (mode == null) mode = "BUYER";
+    if (mode == null) mode = "SELLER";
 
     List<Property> myProperties = (List<Property>) request.getAttribute("myProperties");
     Long totalProperties = (Long) request.getAttribute("totalProperties");
@@ -839,7 +839,7 @@ body {
             </div>
             
             <div class="text-center mt-5">
-                <a href="user-properties.jsp" class="action-btn action-btn-secondary">
+                <a href="user-properties" class="action-btn action-btn-secondary">
                     <i class="fas fa-list me-2"></i>View All Properties
                 </a>
             </div>
