@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 
-@WebServlet(urlPatterns = {"/", "/index"})
+@WebServlet( "/index")
 public class HomeServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;

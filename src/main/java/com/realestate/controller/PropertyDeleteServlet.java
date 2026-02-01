@@ -23,6 +23,7 @@ public class PropertyDeleteServlet extends HttpServlet
 	
 		public void init(ServletConfig config) throws ServletException
 		{
+			super.init(config);
 			propertyService=PropertyServiceFactory.getServiceInstance();
 		}
 
@@ -37,13 +38,18 @@ public class PropertyDeleteServlet extends HttpServlet
 		session.setAttribute("successMessage", "Property deleted successfully");
 
 		//   redirect to user-properties
-		response.sendRedirect(request.getContextPath() + "/user-properties");	}
+		response.sendRedirect(request.getContextPath() + "/user-properties");	
+		
+	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 
-		doGet(request, response);
+        doGet(request, response);
+
+	
 	}
+	
 
 }

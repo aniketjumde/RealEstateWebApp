@@ -477,10 +477,13 @@ public class PropertyDaoImpl implements PropertyDAO
 		 {
 
 		        return session.createQuery(
-		            "select p from Property p " +
-		            "join fetch p.user " +
-		            "where p.verification = :status",
-		            Property.class
+		        		"SELECT DISTINCT p " +
+		        	            "FROM Property p " +
+		        	            "LEFT JOIN FETCH p.images " +
+		        	            "LEFT JOIN FETCH p.user " +
+		        	            "WHERE p.verification = :status " +
+		        	            "ORDER BY p.createdAt DESC",
+		        	            Property.class
 		        )
 		        .setParameter("status", PropertyVerificationStatus.PENDING)
 		        .getResultList();
