@@ -4,13 +4,16 @@
 <%@ page import="com.realestate.model.Property" %>
 <%@ page import="com.realestate.model.User" %>
 <%@ page import="com.realestate.enums.PropertyVerificationStatus" %>
-<%@ include file="/Header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Search Properties | RealEstate</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 
     /* ENHANCED STYLING WITH SAME FUNCTIONALITY */
@@ -488,6 +491,7 @@
 </style>
 </head>
 <body>
+<%@ include file="/Header.jsp" %>
 
 <div class="container">
     <!-- ENHANCED PAGE HEADER -->

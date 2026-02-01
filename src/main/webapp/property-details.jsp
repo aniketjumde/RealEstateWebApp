@@ -3,18 +3,19 @@
 <%@ page import="com.realestate.model.Property" %>
 <%@ page import="com.realestate.model.User" %>
 <%@ page import="com.realestate.enums.PropertyVerificationStatus" %>
-<%@ include file="/Header.jsp" %>
 
 <%
 Property property = (Property) request.getAttribute("property");
-loggedUser = (User) session.getAttribute("user");
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title><%= property.getTitle() %> | RealEstate</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     :root {
         --primary: #0f766e;
@@ -492,8 +493,12 @@ loggedUser = (User) session.getAttribute("user");
 </style>
 </head>
 <body>
-
+<%@ include file="/Header.jsp" %>
+<%
+ loggedUser = (User) session.getAttribute("user");
+%>
 <div class="property-container">
+
     <!-- ENHANCED HEADER -->
     <div class="property-header">
         <div class="property-badge">

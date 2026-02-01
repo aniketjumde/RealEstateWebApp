@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.realestate.model.User" %>
-<%@ include file="/Header.jsp" %>
-
 <%
 User user = (User) session.getAttribute("user");
 if (user == null) {
@@ -18,8 +16,11 @@ if (user == null) {
 <meta charset="UTF-8">
 <title>My Profile</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
 body {
@@ -151,6 +152,7 @@ body {
 </head>
 
 <body>
+<%@ include file="/Header.jsp" %>
 
 <div class="container">
     <div class="profile-card">

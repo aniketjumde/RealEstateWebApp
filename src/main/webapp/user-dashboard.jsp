@@ -6,8 +6,6 @@
 <%@ page import="com.realestate.enums.InquiryStatus" %>
 <%@ page import="com.realestate.enums.PropertyVerificationStatus" %>
 
-<%@ include file="/Header.jsp" %>
-
 <%
     User user = (User) session.getAttribute("user");
     if (user == null) {
@@ -40,9 +38,10 @@
 <head>
 <title>User Dashboard</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <style>
 /* Modern Dashboard Styling */
 :root {
@@ -537,6 +536,7 @@ body {
 </head>
 
 <body>
+<%@ include file="/Header.jsp" %>
 
 <div class="container mt-4 mb-5">
 
@@ -716,7 +716,7 @@ body {
                 <a href="add-property.jsp" class="action-btn action-btn-primary">
                     <i class="fas fa-plus me-2"></i>Add New Property
                 </a>
-                <a href="user-properties.jsp" class="action-btn action-btn-secondary">
+                <a href="user-properties" class="action-btn action-btn-secondary">
                     <i class="fas fa-list me-2"></i>View All Properties
                 </a>
             </div>

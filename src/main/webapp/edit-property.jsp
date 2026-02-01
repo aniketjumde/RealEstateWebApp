@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ include file="/Header.jsp" %>
 <%@ page import="com.realestate.model.Property" %>
 <%@ page import="com.realestate.enums.PropertyVerificationStatus" %>
 
@@ -25,6 +24,10 @@
 <!-- Leaflet for maps -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
     body {
@@ -308,6 +311,7 @@
 </head>
 
 <body>
+<%@ include file="/Header.jsp" %>
 
 <div class="container">
     <h2>Edit Property</h2>
