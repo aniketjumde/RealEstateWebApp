@@ -15,22 +15,22 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-
     /* ENHANCED STYLING WITH SAME FUNCTIONALITY */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         margin: 0;
-        padding: 20px;
+        padding: 0; /* CHANGED FROM 20px TO 0 */
         min-height: 100vh;
     }
     
     .container {
         max-width: 1400px;
         margin: 0 auto;
+        padding: 0 20px; /* ADD HORIZONTAL PADDING HERE INSTEAD */
     }
     
-    /* ENHANCED PAGE HEADER */
+    /* ENHANCED PAGE HEADER - NO TOP MARGIN */
     .page-header {
         background: linear-gradient(135deg, #0f766e 0%, #0d6efd 100%);
         color: white;
@@ -40,6 +40,20 @@
         text-align: center;
         position: relative;
         overflow: hidden;
+        border: none !important;
+        margin-top: 0; /* ADDED - REMOVE TOP MARGIN */
+    }
+    
+    /* ADD THIS TO REMOVE GAP FROM HEADER */
+    header {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* OR IF HEADER HAS CONTAINER CLASS, ADD THIS */
+    .container header {
+        padding-top: 0;
+        margin-top: 0;
     }
     
     .page-header:before {
@@ -75,6 +89,7 @@
         margin-bottom: 40px;
         position: relative;
         z-index: 10;
+        border: none !important;
     }
     
     .search-title {
@@ -107,27 +122,29 @@
     .search-select {
         width: 100%;
         padding: 14px 16px;
-        border: 2px solid #e2e8f0;
+        border: 1px solid #e2e8f0 !important;
         border-radius: 10px;
         font-size: 1rem;
         font-family: inherit;
         transition: all 0.3s ease;
         box-sizing: border-box;
         background: white;
+        border-width: 1px !important;
     }
     
     .search-input:focus,
     .search-select:focus {
         outline: none;
-        border-color: #0f766e;
+        border-color: #0f766e !important;
         box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+        border-width: 1px !important;
     }
     
     .search-button {
         padding: 14px 30px;
         background: linear-gradient(135deg, #0f766e, #0d6efd);
         color: white;
-        border: none;
+        border: none !important;
         border-radius: 10px;
         font-weight: 600;
         font-size: 1rem;
@@ -162,6 +179,7 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 15px;
+        border: none !important;
     }
     
     .results-count {
@@ -189,6 +207,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        border: none !important;
     }
     
     .clear-search:hover {
@@ -197,7 +216,7 @@
         transform: translateY(-2px);
     }
     
-    /* ENHANCED PROPERTY GRID - SAME STRUCTURE */
+    /* ENHANCED PROPERTY GRID */
     .property-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -216,7 +235,7 @@
         text-decoration: none;
         color: inherit;
         display: block;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: none !important;
     }
     
     .property-card:hover {
@@ -256,6 +275,7 @@
         letter-spacing: 0.5px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         z-index: 2;
+        border: none !important;
     }
     
     .badge-available {
@@ -286,6 +306,7 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         backdrop-filter: blur(5px);
         z-index: 2;
+        border: none !important;
     }
     
     /* ENHANCED BODY */
@@ -323,6 +344,7 @@
         padding: 15px;
         border-radius: 10px;
         margin-bottom: 15px;
+        border: none !important;
     }
     
     .property-meta span {
@@ -346,6 +368,7 @@
         font-weight: 600;
         display: inline-block;
         margin-top: 10px;
+        border: none !important;
     }
     
     /* EMPTY STATE */
@@ -356,6 +379,7 @@
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         margin-top: 30px;
+        border: none !important;
     }
     
     .empty-state i {
@@ -390,6 +414,7 @@
         border-radius: 10px;
         font-weight: 600;
         transition: all 0.3s ease;
+        border: none !important;
     }
     
     .adjust-search-btn:hover {
@@ -410,6 +435,7 @@
         font-weight: 600;
         margin-top: 30px;
         transition: all 0.3s ease;
+        border: none !important;
     }
     
     .back-button:hover {
@@ -447,8 +473,9 @@
             align-items: flex-start;
         }
         
-        body {
-            padding: 10px;
+        /* CHANGED FROM body TO .container */
+        .container {
+            padding: 0 10px;
         }
     }
     
@@ -483,10 +510,40 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        border: none !important;
     }
     
     .filter-tag i {
         font-size: 0.8rem;
+    }
+    
+    /* GLOBAL BORDER RESET */
+    * {
+        border-width: 0 !important;
+        box-sizing: border-box;
+    }
+    
+    /* EXCEPTION FOR FORM INPUTS */
+    input, select, textarea {
+        border-width: 1px !important;
+        border-style: solid !important;
+        border-color: #e2e8f0 !important;
+    }
+    
+    /* FIX FOR HEADER GAP - ADD THESE RULES */
+    header, .header, #header {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    /* Ensure the header nav doesn't have top margin */
+    nav.navbar {
+        margin-bottom: 0 !important;
+    }
+    
+    /* If header has a container inside, adjust it */
+    header .container {
+        padding-top: 0 !important;
     }
 </style>
 </head>
@@ -724,6 +781,7 @@
         </a>
     </div>
 </div>
+<%@ include file="/Footer.jsp" %>
 
 </body>
 </html>

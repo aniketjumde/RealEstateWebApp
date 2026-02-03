@@ -34,16 +34,12 @@
         font-family: Arial, sans-serif;
         background-color: #f4f6f8;
         margin: 0;
-        padding: 20px;
     }
 
     .container {
-        max-width: 900px;
         margin: 0 auto;
         background: #ffffff;
-        padding: 25px;
         border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
 
     h2 {
@@ -313,7 +309,7 @@
 <body>
 <%@ include file="/Header.jsp" %>
 
-<div class="container">
+<div class="container" style="margin-top:10px">
     <h2>Edit Property</h2>
     <div class="sub">Update your property details</div>
 
@@ -507,7 +503,7 @@
 
        
 
-        <button type="submit" id="submitBtn">Update Property</button>
+        <button type="submit" id="submitBtn" style="margin-bottom: 50px;">Update Property</button>
 
     </form>
 </div>
@@ -731,6 +727,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 /*]]>*/
 </script>
-
 </body>
 </html>

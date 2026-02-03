@@ -535,5 +535,8 @@
             }
         %>
     </script>
+    
+<%@ include file="/Footer.jsp" %>
+
 </body>
 </html>

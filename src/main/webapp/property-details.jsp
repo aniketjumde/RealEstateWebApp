@@ -735,5 +735,8 @@ Property property = (Property) request.getAttribute("property");
         element.classList.add('active');
     }
 </script>
+
+<%@ include file="/Footer.jsp" %>
+
 </body>
 </html>

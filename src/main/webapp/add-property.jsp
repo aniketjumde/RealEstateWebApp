@@ -16,20 +16,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
-    body {
+   body {
         font-family: Arial, sans-serif;
         background-color: #f4f6f8;
         margin: 0;
-        padding: 20px;
     }
 
     .container {
-        max-width: 900px;
-        margin: 0 auto;
         background: #ffffff;
-        padding: 25px;
         border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        
     }
 
     h2 {
@@ -285,7 +281,7 @@
 <%@ include file="/Header.jsp" %>
 
 <div class="container">
-    <h2>Add New Property</h2>
+<h2 style="margin-top: 10px;">Add New Property</h2>
     <div class="sub">Fill in the details below to list your property on our platform</div>
 
     <form id="propertyForm" action="property" method="post" enctype="multipart/form-data">
@@ -473,7 +469,9 @@
         }
         %>
 
-        <button type="submit" id="submitBtn">Add Property</button>
+			<button type="submit" id="submitBtn" style="margin-bottom: 50px;">
+			    Add Property
+			</button>
 
     </form>
 </div>
@@ -704,4 +702,5 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 </body>
+
 </html>

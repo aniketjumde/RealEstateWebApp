@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         :root {
             --primary: #0f766e;
@@ -481,59 +480,8 @@
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h3 class="fw-bold mb-3">🏠 RealEstate</h3>
-                    <p class="text-light">Your trusted partner in finding the perfect property. We connect buyers, sellers, and renters across the country.</p>
-                    <div class="mt-4">
-                        <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
-                    <h5 class="fw-bold mb-3">Quick Links</h5>
-                    <div class="footer-links">
-                        <a href="index.jsp">Home</a>
-                        <a href="property">Properties</a>
-                        <a href="about.jsp">About Us</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
-                    <h5 class="fw-bold mb-3">For Users</h5>
-                    <div class="footer-links">
-                        <a href="dashboard">Dashboard</a>
-                        <a href="profile.jsp">My Profile</a>
-                        <a href="add-property.jsp">Add Property</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4">
-                    <h5 class="fw-bold mb-3">Contact Info</h5>
-                    <div class="text-light">
-                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> 123 Real Estate St, New York, NY</p>
-                        <p class="mb-2"><i class="fas fa-phone me-2"></i> (555) 123-4567</p>
-                        <p class="mb-0"><i class="fas fa-envelope me-2"></i> info@realestate.com</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="copyright text-center">
-                        &copy; 2026 RealEstate. All rights reserved. | <a href="#" class="text-light">Privacy Policy</a> | <a href="#" class="text-light">Terms of Service</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-  
+   <%@ include file="/Footer.jsp" %>
+   
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

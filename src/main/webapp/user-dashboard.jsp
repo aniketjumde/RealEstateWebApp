@@ -923,6 +923,7 @@ body {
 <% } %>
 
 </div>
+<%@ include file="/Footer.jsp" %>
 
 <script>
 // Tab Switching Functionality

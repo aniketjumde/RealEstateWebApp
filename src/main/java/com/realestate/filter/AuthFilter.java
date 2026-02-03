@@ -31,6 +31,7 @@ public class AuthFilter implements Filter {
         	    path.startsWith("/css/") ||
         	    path.startsWith("/js/") ||
         	    path.startsWith("/images/") ||
+        	    path.startsWith("/about.jsp") ||   
         	    path.startsWith("/property") ||   
         	    path.startsWith("/property-list") ||
         	    path.startsWith("/property-details") ||

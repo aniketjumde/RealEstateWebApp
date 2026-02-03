@@ -27,7 +27,7 @@
       <!-- Center Menu -->
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link" href="	${pageContext.request.contextPath}/index.jsp">
+          <a class="nav-link" href="index">
             <i class="fas fa-home me-1"></i> Home
           </a>
         </li>

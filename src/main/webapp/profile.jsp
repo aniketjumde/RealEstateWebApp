@@ -20,17 +20,14 @@ if (user == null) {
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
 body {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     min-height: 100vh;
-    padding: 20px;
 }
 
-.container {
-    max-width: 600px;
+
 }
 
 .profile-card {
@@ -49,6 +46,7 @@ body {
 }
 
 .profile-photo {
+	margin-top: 20px;
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -56,6 +54,7 @@ body {
     border: 5px solid white;
     box-shadow: 0 5px 20px rgba(15, 118, 110, 0.15);
     margin-bottom: 20px;
+    
 }
 
 .profile-name {
@@ -231,11 +230,12 @@ body {
                 Member since <%= user.getCreatedAt() %>
             </div>
         </form>
-    </div>
+    </div>	
 </div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<%@ include file="/Footer.jsp" %>
 
 </body>
 </html>
