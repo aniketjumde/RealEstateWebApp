@@ -107,13 +107,9 @@ public class PropertyDaoImpl implements PropertyDAO
 	{
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-	        return session.createQuery("SELECT p FROM Property p " +
-	            "LEFT JOIN FETCH p.images " +
-	            "LEFT JOIN FETCH p.user " +
-	            "WHERE p.id = :id",
-	            Property.class
-	        ).setParameter("id", id)
-	         .uniqueResult();
+	        return session.createQuery("SELECT p FROM Property p LEFT JOIN FETCH p.images LEFT JOIN FETCH p.user WHERE p.id = :id", Property.class)
+	        			  .setParameter("id", id)
+	        			  .uniqueResult();
 	    }
 	}
 	
@@ -122,10 +118,8 @@ public class PropertyDaoImpl implements PropertyDAO
 	{
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-            return session.createQuery("SELECT DISTINCT p FROM Property p " +
-                    "LEFT JOIN FETCH p.images " +
-                    "LEFT JOIN FETCH p.user",
-                    Property.class).getResultList();
+            return session.createQuery("SELECT DISTINCT p FROM Property p LEFT JOIN FETCH p.images LEFT JOIN FETCH p.user",Property.class)
+            			  .getResultList();
         }
 		catch(Exception e)
 		{
@@ -163,11 +157,7 @@ public class PropertyDaoImpl implements PropertyDAO
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-	        StringBuilder hql = new StringBuilder(
-	            "SELECT DISTINCT p FROM Property p " +
-	            "LEFT JOIN FETCH p.images " +
-	            "WHERE p.verification = :status"
-	        );
+	        StringBuilder hql = new StringBuilder("SELECT DISTINCT p FROM Property p LEFT JOIN FETCH p.images WHERE p.verification = :status");
 
 	        if (city != null && !city.isEmpty()) {
 	            hql.append(" AND p.city = :city");
@@ -213,9 +203,7 @@ public class PropertyDaoImpl implements PropertyDAO
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-			 Query query = session.createQuery( "SELECT DISTINCT p FROM Property p " +
-					    "LEFT JOIN FETCH p.images " +
-					    "WHERE p.verification = :status",Property.class);
+			 Query query = session.createQuery( "SELECT DISTINCT p FROM Property p LEFT JOIN FETCH p.images WHERE p.verification = :status",Property.class);
 			 query.setParameter("status",status);
 			  
 			  return query.getResultList();
@@ -234,11 +222,7 @@ public class PropertyDaoImpl implements PropertyDAO
 	{
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-	        Query query=session.createQuery(
-	        		 		"SELECT DISTINCT p FROM Property p " +
-	        		            "LEFT JOIN FETCH p.images " +
-	        		            "WHERE p.user.id = :userId",
-	        		            Property.class);
+	        Query query=session.createQuery("SELECT DISTINCT p FROM Property p LEFT JOIN FETCH p.images WHERE p.user.id = :userId",Property.class);
 	        
 	        query.setParameter("userId", user.getId());
 	        return query.getResultList();
@@ -251,9 +235,7 @@ public class PropertyDaoImpl implements PropertyDAO
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		{
-			StringBuilder hql=new StringBuilder( "SELECT DISTINCT p FROM Property p " +
-				    "LEFT JOIN FETCH p.images " +
-				    "WHERE 1=:1");
+			StringBuilder hql=new StringBuilder( "SELECT DISTINCT p FROM Property p LEFT JOIN FETCH p.images WHERE 1=:1");
 			
 			if(city!=null && !city.isEmpty())
 			{
@@ -308,10 +290,7 @@ public class PropertyDaoImpl implements PropertyDAO
         try (Session session = HibernateUtil.getSessionFactory().openSession()) 
         {
 
-            Query query = session.createQuery(
-                "SELECT COUNT(p.id) FROM Property p WHERE p.user.id = :userId",
-                Long.class
-            );
+            Query query = session.createQuery("SELECT COUNT(p.id) FROM Property p WHERE p.user.id = :userId",Long.class);
 
             query.setParameter("userId", userId);
             return (long) query.getSingleResult();
@@ -328,11 +307,7 @@ public class PropertyDaoImpl implements PropertyDAO
         try (Session session = HibernateUtil.getSessionFactory().openSession()) 
         {
 
-            Query query = session.createQuery(
-                "SELECT COUNT(p.id) FROM Property p " +
-                "WHERE p.user.id = :userId AND p.verification = :status",
-                Long.class
-            );
+            Query query = session.createQuery("SELECT COUNT(p.id) FROM Property p WHERE p.user.id = :userId AND p.verification = :status", Long.class);
 
             query.setParameter("userId", userId);
             query.setParameter("status", PropertyVerificationStatus.APPROVED);
@@ -350,11 +325,7 @@ public class PropertyDaoImpl implements PropertyDAO
         try (Session session = HibernateUtil.getSessionFactory().openSession())
         {
 
-            Query query = session.createQuery(
-                "SELECT COUNT(p.id) FROM Property p " +
-                "WHERE p.user.id = :userId AND p.verification = :status",
-                Long.class
-            );
+            Query query = session.createQuery("SELECT COUNT(p.id) FROM Property p WHERE p.user.id = :userId AND p.verification = :status",Long.class );
 
             query.setParameter("userId", userId);
             query.setParameter("status", PropertyVerificationStatus.PENDING);
@@ -374,11 +345,7 @@ public class PropertyDaoImpl implements PropertyDAO
         try (Session session = HibernateUtil.getSessionFactory().openSession()) 
         {
 
-            Query query = session.createQuery(
-                "SELECT COUNT(p.id) FROM Property p " +
-                "WHERE p.user.id = :userId AND p.verification = :status",
-                Long.class
-            );
+            Query query = session.createQuery( "SELECT COUNT(p.id) FROM Property p WHERE p.user.id = :userId AND p.verification = :status",Long.class);
 
             query.setParameter("userId", userId);
             query.setParameter("status", PropertyVerificationStatus.REJECTED);
@@ -476,15 +443,7 @@ public class PropertyDaoImpl implements PropertyDAO
 		 try (Session session = HibernateUtil.getSessionFactory().openSession()) 
 		 {
 
-		        return session.createQuery(
-		        		"SELECT DISTINCT p " +
-		        	            "FROM Property p " +
-		        	            "LEFT JOIN FETCH p.images " +
-		        	            "LEFT JOIN FETCH p.user " +
-		        	            "WHERE p.verification = :status " +
-		        	            "ORDER BY p.createdAt DESC",
-		        	            Property.class
-		        )
+		        return session.createQuery("SELECT DISTINCT p FROM Property p LEFT JOIN FETCH p.images LEFT JOIN FETCH p.user WHERE p.verification = :status ORDER BY p.createdAt DESC",Property.class)
 		        .setParameter("status", PropertyVerificationStatus.PENDING)
 		        .getResultList();
 

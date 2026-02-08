@@ -38,14 +38,7 @@ public class InquiryDaoImpl implements InquiryDAO
 	{
 		try(Session session=HibernateUtil.getSessionFactory().openSession();)
 		 {
-			return session.createQuery(
-		            "SELECT i FROM Inquiry i " +
-		            "JOIN FETCH i.property p " +
-		            "JOIN FETCH i.sender s " +
-		            "WHERE i.receiver.id = :sellerId " +
-		            "ORDER BY i.inquiryId DESC",
-		            Inquiry.class
-		        )
+			return session.createQuery("SELECT i FROM Inquiry i JOIN FETCH i.property p JOIN FETCH i.sender s WHERE i.receiver.id = :sellerId ORDER BY i.inquiryId DESC",Inquiry.class)
 		        .setParameter("sellerId", sellerId)
 		        .getResultList();
 		 }
@@ -62,16 +55,9 @@ public class InquiryDaoImpl implements InquiryDAO
 	{
 		try(Session session=HibernateUtil.getSessionFactory().openSession();)
 		 {
-			return session.createQuery(
-		            "SELECT i FROM Inquiry i " +
-		            "JOIN FETCH i.property p " +
-		            "JOIN FETCH i.receiver r " +
-		            "WHERE i.sender.id = :buyerId " +
-		            "ORDER BY i.inquiryId DESC",
-		            Inquiry.class
-		        )
-		        .setParameter("buyerId", buyerId)
-		        .getResultList();
+			return session.createQuery("SELECT i FROM Inquiry i JOIN FETCH i.property p JOIN FETCH i.receiver r WHERE i.sender.id = :buyerId ORDER BY i.inquiryId DESC",Inquiry.class)
+						  .setParameter("buyerId", buyerId)
+						  .getResultList();
 		 }
 		 catch(Exception e)
 		 {
