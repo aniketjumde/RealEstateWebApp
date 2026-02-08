@@ -48,7 +48,6 @@ large-scale Java web applications are structured.
 ### 📩 Inquiry System
 - Buyers can send inquiries to sellers
 - Sellers can view received inquiries
-- Admin can manage users with existing inquiries
 
 ### 🛠 Admin Panel
 - View all users
@@ -63,10 +62,103 @@ large-scale Java web applications are structured.
 - Role-based dashboard views
 
 ---
+## 🏗 Architecture & Design Patterns
 
-## 🏗 Project Architecture
+### 🧱 MVC Architecture
+- **Controller Layer** → Servlets  
+- **Service Layer** → Business Logic  
+- **DAO Layer** → Database Operations (Hibernate)  
+- **View Layer** → JSP  
+
+### 🏭 Design Patterns Used
+- **Singleton Pattern** → Hibernate Utility (SessionFactory)
+- **Factory Pattern** → Service Object Creation
+- **Layered Architecture Pattern**
+- **Role-Based Authorization using Filters**
+
+---
+
+## 📁 Project Structure
 ```
+RealEstateWebApp
+│
+├── Deployment Descriptor
+├── JAX-WS Web Services
+│
+├── Java Resources
+│   └── src/main/java
+│       └── com.realestate
+│
+│           ├── config              → Configuration Layer
+│           │
+│           ├── controller          → Servlet Layer (MVC Controller)
+│           │
+│           ├── dao                 → Data Access Layer 
+│           │
+│           ├── service             → Business Logic Layer
+│           │
+│           ├── factory             → Factory Design Pattern Layer
+│           │
+│           ├── model               → Entity Classes
+│           │
+│           ├── enums               → Enum Definitions
+│           │
+│           ├── filter              → Security / Authentication Layer
+│           │
+│           └── util                → Utility Classes (Singleton Helper)
+│
+├── src/main/resources
+│   ├── Hibernate Configuration
+│   └── Application Properties
+│
+├── src/main/webapp
+│   ├── css                                                  
+│   ├── admin                   → Admin Dashboard Pages
+│   ├── user                    → User Dashboard Pages
+│   ├── Public Pages            → Home / About
+│
+├── pom.xml                         → Maven Build Configuration
+└── target                          → Compiled Output
+
 ```
+----
+
+## 🛠 Technology Stack
+
+### Backend
+- Java
+- Servlets
+- JSP
+- Hibernate ORM
+- MySQL
+- Maven
+- Apache Tomcat
+
+### Frontend
+- HTML5
+- CSS3
+- Bootstrap
+- JavaScript
+- SweetAlert
+- Leaflet.js (Maps)
+
+### Tools
+- Eclipse / VS Code
+- MySQL Workbench
+- Postman
+- Git & GitHub
+
+---
+
+## 🔐 Security Features
+
+- Role-based authorization (Admin / User)
+- Authentication Filter protection
+- Safe deletion with foreign key handling
+- Hibernate session management
+- Secure login with Firebase
+
+___
 
 ## 🚀 Learning Outcomes
 
@@ -82,7 +174,6 @@ large-scale Java web applications are structured.
 ## 👨‍💻 Developer
 
 **Aniket Jumde**  
-Java Web Developer (Fresher)
 
 - GitHub: [https://github.com/aniketjumde](https://github.com/aniketjumde)
 
