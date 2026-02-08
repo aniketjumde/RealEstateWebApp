@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/Header.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,15 +36,7 @@
             box-sizing: border-box;
         }
         
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            color: var(--dark-text);
-            line-height: 1.7;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
+       
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -426,6 +417,7 @@
 </head>
 
 <body>
+<%@ include file="/Header.jsp" %>
 
 <!-- Hero Section -->
 <section class="hero-section">

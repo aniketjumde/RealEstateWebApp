@@ -32,7 +32,6 @@ Property property = (Property) request.getAttribute("property");
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        padding: 20px;
         margin: 0;
         min-height: 100vh;
     }

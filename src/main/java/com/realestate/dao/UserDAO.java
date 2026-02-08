@@ -17,6 +17,8 @@ public interface UserDAO
 	 public long getTotalUsers();
 	 public User findById(Long userId);
 	 public void deleteUser(User user);
+	 public void updateUserRole(User user, Role role) ;
+
 
 
 }

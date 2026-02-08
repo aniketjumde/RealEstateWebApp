@@ -198,6 +198,37 @@ public class UserDaoImpl implements UserDAO
         }
 		
 	}
+	
+	public void updateUserRole(User user, Role newRole) {
+
+
+        Transaction transaction= null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) 
+        {
+
+        	transaction = session.beginTransaction();
+
+            User existingUser = session.get(User.class, user.getId());
+
+            if (existingUser != null) 
+            {
+                existingUser.setRole(newRole);
+                session.merge(existingUser); 
+            }
+
+            transaction.commit();
+
+        } 
+        catch (Exception e) 
+        {
+
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        }
+    }
+
+
 
 	
 	

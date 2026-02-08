@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 
-@WebServlet( "/index")
+@WebServlet("/index")
 public class HomeServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +33,7 @@ public class HomeServlet extends HttpServlet
 		 System.out.println(featuredProperties);
 		 request.setAttribute("featuredProperties",featuredProperties);
 
-	        request.getRequestDispatcher("index.jsp").forward(request, response);
+	        request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	

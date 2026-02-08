@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.realestate.model.User" %>
@@ -204,20 +205,38 @@
 
                                     <!-- Role -->
                                     <td>
-                                        <form action="${pageContext.request.contextPath}/admin/admin-user-role" 
-                                              method="post" 
-                                              class="role-form" 
-                                              id="roleForm-<%= u.getId() %>">
-                                            <input type="hidden" name="userId" value="<%= u.getId() %>">
-                                            <select name="role" 
-                                                    class="role-select-small" 
-                                                    onchange="confirmRoleChange('<%= u.getName() %>', '<%= u.getId() %>', this.value)"
-                                                    <%= isCurrentUser ? "disabled" : "" %>>
-                                                <option value="USER" <%= u.getRole() == Role.USER ? "selected" : "" %>>User</option>
-                                                <option value="ADMIN" <%= u.getRole() == Role.ADMIN ? "selected" : "" %>>Admin</option>
-                                            </select>
-                                        </form>
-                                    </td>
+    <form action="<%= request.getContextPath() %>/admin/admin-user-role"
+          method="post"
+          style="display:inline;"
+          onsubmit="return confirmRoleChange('<%= u.getName() %>');">
+
+        <!-- Always send userId -->
+        <input type="hidden" name="userId" value="<%= u.getId() %>">
+
+        <!-- Role Select (THIS sends role directly) -->
+        <select name="role"
+                class="role-select-small"
+                <%= isCurrentUser ? "disabled" : "" %>>
+            <option value="USER"
+                <%= u.getRole() == Role.USER ? "selected" : "" %>>
+                User
+            </option>
+
+            <option value="ADMIN"
+                <%= u.getRole() == Role.ADMIN ? "selected" : "" %>>
+                Admin
+            </option>
+        </select>
+
+        <% if (!isCurrentUser) { %>
+            <button type="submit" class="btn-icon-sm" title="Update Role">
+                <i class="fas fa-save"></i>
+            </button>
+        <% } %>
+
+    </form>
+</td>
+
 
                                     
                                     <!-- Status -->
@@ -306,28 +325,8 @@
             });
         });
 
-        // Role change confirmation
-        function confirmRoleChange(userName, userId, newRole) {
-            Swal.fire({
-                title: 'Change User Role?',
-                html: `Change role for <b>${userName}</b> to <b>${newRole}</b>?`,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#2A5CAA',
-                cancelButtonColor: '#6B7280',
-                confirmButtonText: 'Change Role',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(`roleForm-${userId}`).submit();
-                } else {
-                    // Reset to original value by reloading the page
-                    location.reload();
-                }
-            });
-            
-            return false;
-        }
+       
+
 
       
 
@@ -375,3 +374,4 @@
     </script>
 </body>
 </html>
+	

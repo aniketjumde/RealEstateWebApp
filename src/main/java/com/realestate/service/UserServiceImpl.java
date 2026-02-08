@@ -59,15 +59,10 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public void updateRole(Long userId, Role role) 
+	public void updateRole(User user, Role role) 
 	{
-		User user = userDao.findById(userId);
+        userDao.updateUserRole(user, role);
 
-	    if (user != null) 
-	    {
-	        user.setRole(role);
-	        userDao.updateUser(user);
-	    }
 	}
 
 	@Override
@@ -76,6 +71,12 @@ public class UserServiceImpl implements UserService
 		User user=userDao.findById(userId);
 		
 		userDao.deleteUser(user);
+	}
+
+	@Override
+	public User findById(Long userId) {
+		
+        return userDao.findById(userId);
 	}
 
 	

@@ -14,9 +14,9 @@ public interface UserService
     public List<User> getAllUsers();
 	public void updateUser(User user);
 	public long getTotalUsers();
-	void updateRole(Long userId, Role role);
+	void updateRole(User user, Role role);
 	public void deleteUser(Long userId);
-	
+	public User findById(Long userId);
 
 
 }

@@ -36,7 +36,7 @@ public class User {
     private String name;
     
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "role",nullable = false)
     private Role role;
     
     private String firebaseUid;

@@ -13,32 +13,38 @@
     
     List<Property> pendingPropertiesList = (List<Property>) request.getAttribute("pendingPropertiesList");
     List<User> recentUsers = (List<User>) request.getAttribute("recentUsers");
+    
+    String uri = request.getRequestURI();
+
 %>
 
  <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="sidebar-header">
             <h2>RealEstate</h2>
-            <div class="admin-badge">Administrator</div>
-        </div>
+            <div class="admin-badge" >Administrator</div>
+    </div>
         
         <div class="nav-menu">
-            <a href="#" class="nav-item active">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
+           <a href="${pageContext.request.contextPath}/admin/dashboard"
+			   class="nav-item <%= uri.contains("/admin/dashboard") ? "active" : "" %>">
+			    <i class="fas fa-tachometer-alt"></i>
+			    <span>Dashboard</span>
+			</a>
+			
+			<a href="${pageContext.request.contextPath}/admin/users"
+			   class="nav-item <%= uri.contains("/admin/users") ? "active" : "" %>">
+			    <i class="fas fa-users"></i>
+			    <span>Manage Users</span>
+			</a>
+			
+			<a href="${pageContext.request.contextPath}/admin/properties"
+			   class="nav-item <%= uri.contains("/admin/properties") ? "active" : "" %>">
+			    <i class="fas fa-home"></i>
+			    <span>All Properties</span>
+			</a>
             
-            <a href="${pageContext.request.contextPath}/admin/users" class="nav-item">
-                <i class="fas fa-users"></i>
-                <span>Manage Users</span>
-            </a>
-            
-            <a href="${pageContext.request.contextPath}/admin/properties" class="nav-item">
-                <i class="fas fa-home"></i>
-                <span>All Properties</span>
-            </a>
-            
-            <a href="${pageContext.request.contextPath}/admin/property-approval" class="nav-item">
+            <a href="${pageContext.request.contextPath}/admin/property-approval" class="nav-item <%= uri.contains("/admin/property-approval") ? "active" : "" %>">
                 <i class="fas fa-clock"></i>
                 <span>Pending Approvals</span>
                 <% if (pendingPropertiesList != null && pendingPropertiesList.size() > 0) { %>

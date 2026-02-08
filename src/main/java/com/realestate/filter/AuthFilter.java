@@ -24,7 +24,7 @@ public class AuthFilter implements Filter {
 
         // PUBLIC RESOURCES
         if (path.equals("/") ||
-        	    path.equals("/index.jsp") ||
+        	    path.equals("/index") ||
         	    path.startsWith("/login.jsp") ||
         	    path.startsWith("/register.jsp") ||
         	    path.startsWith("/auth/") ||
