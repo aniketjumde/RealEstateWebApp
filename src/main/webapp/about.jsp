@@ -553,7 +553,7 @@
         <div class="developer-card">
             <div class="dev-avatar">
                 <!-- Replace this with your actual photo URL -->
-                <img src="https://avatars.githubusercontent.com/u/your-profile-id" alt="Aniket Jumde" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-user-tie\" style=\"font-size: 48px; color: var(--primary); line-height: 150px;\"></i>'">
+                <img src="https://avatars.githubusercontent.com/u/158746574?v=4" alt="Aniket Jumde" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-user-tie\" style=\"font-size: 48px; color: var(--primary); line-height: 150px;\"></i>'">
             </div>
             <h2 class="dev-name">Aniket Jumde</h2>
             <p class="dev-title">Software Developer</p>
@@ -568,7 +568,7 @@
            
             
             <div class="social-links">
-                <a href="mailto:contact@aniketjumde.com" class="social-link" title="Email">
+				<a href="mailto:aniketjumde55@gmail.com" class="social-link" title="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
                 <a href="https://github.com/aniketjumde" class="social-link" title="GitHub">

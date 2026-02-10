@@ -18,6 +18,11 @@ public class HibernateUtil
 		{
 			Configuration configuration=new Configuration();
 			configuration.configure(HibernateConfig.HIBCONFIG_FILE);
+
+		    configuration.setProperty("hibernate.connection.url",System.getenv("DB_URL"));
+		    configuration.setProperty("hibernate.connection.username",System.getenv("DB_USER"));
+		    configuration.setProperty("hibernate.connection.password",System.getenv("DB_PASSWORD"));
+		    
 			sessionFactory=configuration.buildSessionFactory();
 		}
 		

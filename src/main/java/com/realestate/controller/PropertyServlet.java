@@ -127,7 +127,7 @@ public class PropertyServlet extends HttpServlet
             successSession.setAttribute("successMessage", "Property added successfully");
 
             // Redirect
-            response.sendRedirect("pages/user/add-property.jsp");
+            response.sendRedirect("add-property.jsp");
 
         } 
         catch (Exception e) 

@@ -19,7 +19,7 @@
                 <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
                     <h5 class="fw-bold mb-3">Quick Links</h5>
                     <div class="footer-links">
-                        <a href="index.jsp">Home</a>
+                        <a href="index">Home</a>
                         <a href="property">Properties</a>
                         <a href="about.jsp">About Us</a>
                     </div>

@@ -30,7 +30,7 @@ public class PropertyImage
 	private Property property;
 	
 	@Lob
-	@Column(columnDefinition="LONGBLOB")
+	@Column(name = "imageData")
 	private byte[] imageData;
 	    
 	@CreationTimestamp
