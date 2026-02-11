@@ -134,7 +134,7 @@ public class PropertyServlet extends HttpServlet
         {
             e.printStackTrace();
             request.setAttribute("error", "Failed to save property");
-            request.getRequestDispatcher("jsp/add-property.jsp").forward(request, response);
+            request.getRequestDispatcher("add-property.jsp").forward(request, response);
         }
         
        
