@@ -21,6 +21,7 @@ public class PropertyServiceImpl implements PropertyService
 	@Override
 	public Property addProperty(Property property) 
 	{
+		property.setCity(property.getCity().toLowerCase());
 		return propertiesDao.save(property);
 	}
 
