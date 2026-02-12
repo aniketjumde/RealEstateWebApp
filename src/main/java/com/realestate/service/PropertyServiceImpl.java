@@ -115,7 +115,7 @@ public class PropertyServiceImpl implements PropertyService
 	@Override
 	public List<Property> searchProperties(String city, String type, Integer minBedrooms) 
 	{
-		return propertiesDao.searchProperties(city, type, minBedrooms);
+		return propertiesDao.searchProperties(city.toLowerCase(), type, minBedrooms);
 	}
 
 	@Override
