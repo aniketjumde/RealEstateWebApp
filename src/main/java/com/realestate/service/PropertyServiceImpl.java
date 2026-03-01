@@ -56,9 +56,12 @@ public class PropertyServiceImpl implements PropertyService
 		return propertiesDao.getPropertiesByTypeAndPurpose(type, purpose);
 	}
 
-	@Override
+	@Override	
 	public List<Property> searchApprovedProperties(String city, String type,String purpose, Integer minBedrooms) 
 	{
+		if(city != null) {
+		    city = city.toLowerCase();
+		}
 		return propertiesDao.searchApprovedProperties(city, type,purpose, minBedrooms);
 	}
 
